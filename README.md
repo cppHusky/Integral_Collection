@@ -1,4 +1,4 @@
-# 积分精选 Integral_Collection
+# 积分精选 Integral Collection
 
 《积分精选》使用LaTeX编辑而成。如需编译，请选用XeLaTeX。
 

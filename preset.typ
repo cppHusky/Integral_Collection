@@ -28,6 +28,8 @@
 			"Noto Serif",
 		),
 		size:10.5pt,
+		top-edge:"bounds",
+		bottom-edge:"bounds",
 	)
 	set par(
 		justify:true,

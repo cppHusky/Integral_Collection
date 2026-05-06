@@ -45,6 +45,7 @@
 		let ghost=text(font:"Adobe Blank","\u{375}")
 		ghost;it;ghost
 	}
+	show math.equation:set block(breakable:true)
 	show heading.where(level:1):it=>{
 		set text(
 			size:30pt,

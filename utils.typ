@@ -18,6 +18,7 @@
 	question:[],
 	answer:[],
 )={
+	parbreak()
 	question-id.step()
 	context text(fill:category,weight:"semibold")[
 		【Q#question-id.display()】
@@ -27,12 +28,14 @@
 	parbreak()
 	text(fill:category,weight:"bold")[【解】]
 	answer
+	parbreak()
 }
 #let ref(id)=context link(
 	label(id),
 	text(font:"Noto Serif")[【Q#question-id.at(query(label(id)).first().location()).first()】]
 )
 #let comment(body)={
+	parbreak()
 	set text(
 		font:"Zhuque Fangsong (technical preview)",
 	)
@@ -43,6 +46,7 @@
 		),
 	)
 	body
+	parbreak()
 }
 #let subst(body)={
 	set text(fill:purple)

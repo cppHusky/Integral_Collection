@@ -52,7 +52,9 @@
 	set text(fill:purple)
 	body
 }
-#let Int(no,body)={
+#let Int(..args)={
+	let args=args.pos()
+	assert(args.len()==1 or args.len()==2)
 	let colors=(
 		none,
 		color.hsv(240deg,95%,50%),
@@ -62,8 +64,23 @@
 		color.hsv(300deg,85%,40%),
 		color.hsv(60deg,100%,40%),
 	)
-	set text(fill:colors.at(no))
-	body
+	if type(args.at(0))==int{
+		let no=args.at(0)
+		set text(fill:colors.at(no))
+		if args.len()==2{
+			let body=args.at(1)
+			assert(type(body)==content)
+			body
+		}
+		else{
+			$I_#no$
+		}
+	}
+	else{
+		set text(fill:colors.at(1))
+		let body=args.at(0)
+		body
+	}
 }
 #let multi-eq(body)={
 	align(

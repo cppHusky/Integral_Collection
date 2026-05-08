@@ -5,3 +5,4 @@
 #let arsinh=$op("arsinh")$
 #let arcosh=$op("arcosh")$
 #let artanh=$op("artanh")$
+#let mod=math.class("binary",math.mod)

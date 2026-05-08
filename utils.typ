@@ -32,7 +32,7 @@
 }
 #let ref(id)=context link(
 	label(id),
-	text(font:"Noto Serif")[【Q#question-id.at(query(label(id)).first().location()).first()】]
+	text(fill:luma(128),font:"Noto Serif")[【Q#question-id.at(query(label(id)).first().location()).first()】]
 )
 #let comment(body)={
 	parbreak()
@@ -51,4 +51,26 @@
 #let subst(body)={
 	set text(fill:purple)
 	body
+}
+#let Int(no,body)={
+	let colors=(
+		none,
+		color.hsv(240deg,95%,50%),
+		color.hsv(120deg,95%,35%),
+		color.hsv(0deg,85%,40%),
+		color.hsv(180deg,95%,35%),
+		color.hsv(300deg,85%,40%),
+		color.hsv(60deg,100%,40%),
+	)
+	set text(fill:colors.at(no))
+	body
+}
+#let multi-eq(body)={
+	align(
+		center,
+		block({
+			show math.equation:set align(left)
+			body
+		})
+	)
 }

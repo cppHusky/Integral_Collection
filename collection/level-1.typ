@@ -1,4 +1,4 @@
-#import "../utils.typ":question,comment,subst,ref
+#import "../utils.typ":question,comment,subst,ref,Int,multi-eq
 #import "../math.typ":ee
 #question(
 	tag:"(x+1)^3",
@@ -33,7 +33,7 @@
 	answer:$
 		integral csc^2(x+1)/2 dif x=&integral csc^2(x+1)/2 dif (x+1)\
 		=&2 integral csc^2(x+1)/2 dif (x+1)/2\
-		=&2 integral csc^2 u dif u,space subst(u=(x+1)/2)\
+		=&2 integral csc^2 u dif u,quad subst(u=(x+1)/2)\
 		=&-2 cot u+C\
 		=&-2 cot (x+1)/2+C
 	$,
@@ -99,7 +99,7 @@
 	answer:$
 		integral sin^3x dif x=&-integral sin^2x dif cos x\
 		=&integral (cos^2x-1)dif cos x\
-		=&integral u^2dif u-integral dif u,space subst(u=cos x)\
+		=&integral u^2dif u-integral dif u,quad subst(u=cos x)\
 		=&1/3u^3-u+C\
 		=&1/3cos^3x-cos x+C
 	$,
@@ -118,7 +118,7 @@
 	$],
 )
 #comment[
-	本题当然也可以使用三角换元，也就是$x=2tan t$，但不如这种做法简洁。
+	本题当然也可以使用三角换元，也就是$subst(x=2tan t)$，但不如这种做法简洁。
 ]
 #question(
 	tag:"x^2/(x^6+1)",
@@ -211,16 +211,16 @@
 	category:red,
 	question:$integral (sqrt(1-x)-sqrt(1+x))/(sqrt(1-x^2))dif x$,
 	answer:[$
-		integral (sqrt(1-x)-sqrt(1+x))/(sqrt(1-x^2))dif x=integral sqrt(1-x)/sqrt(1-x^2)dif x-integral sqrt(1+x)/sqrt(1-x^2)dif x
-	$分别解这两个积分，得到$
-		&I_1=integral sqrt(1-x)/sqrt(1-x^2)dif x=integral (dif x)/sqrt(1+x)=integral (x+1)^(-1/2)dif(x+1)=2sqrt(1+x)+C_1\
-		&I_2=integral sqrt(1+x)/sqrt(1-x^2)dif x=integral (dif x)/sqrt(1-x)=-integral (1-x)^(-1/2)dif(1-x)=-2sqrt(1-x)+C_2
-	$所以原积分可表示为$
-		I_1-I_2=2sqrt(1+x)+2sqrt(1-x)+C
+		integral (sqrt(1-x)-sqrt(1+x))/(sqrt(1-x^2))dif x=Int(#1,integral sqrt(1-x)/sqrt(1-x^2)dif x)-Int(#2,integral sqrt(1+x)/sqrt(1-x^2)dif x)
+	$分别解这两个积分，得到#multi-eq[$
+		Int(#1,I_1=integral sqrt(1-x)/sqrt(1-x^2)dif x)=integral (dif x)/sqrt(1+x)=integral (x+1)^(-1/2)dif(x+1)=2sqrt(1+x)+C_1$$
+		Int(#2,I_2=integral sqrt(1+x)/sqrt(1-x^2)dif x)=integral (dif x)/sqrt(1-x)=-integral (1-x)^(-1/2)dif(1-x)=-2sqrt(1-x)+C_2
+	$]所以原积分可表示为$
+		Int(#1,I_1)-Int(#2,I_2)=2sqrt(1+x)+2sqrt(1-x)+C
 	$]
 )
 #comment[
-	本题用到了分项的方法，把分子分成两项，从而将原本困难的积分问题转化成两个较容易的子问题$I_1, I_2$分别求解。分项方法广泛用于各种积分问题中，其本质简单但应用多样，有时甚至相当有技巧性。我们会在后续解题过程中逐步领略。
+	本题用到了分项的方法，把分子分成两项，从而将原本困难的积分问题转化成两个较容易的子问题$Int(#1,I_1), Int(#2,I_2)$分别求解。分项方法广泛用于各种积分问题中，其本质简单但应用多样，有时甚至相当有技巧性。我们会在后续解题过程中逐步领略。
 ]
 #question(
 	tag:"1/(sqrt(x)+sqrt(x-1))",
@@ -270,12 +270,12 @@
 	category:blue,
 	question:$integral sin x cos pi x dif x$,
 	answer:[$
-		integral sin x cos pi x dif x=1/2integral sin[(1+pi)x]dif x+1/2integral sin[(1-pi)x]dif x
-	$分别解这两个积分，得到$
-		&I_1=integral sin[(1+pi)x]dif x=1/(1+pi)integral sin[(1+pi)x]dif[(1+pi)x]=-cos[(1+pi)x]/(1+pi)+C_1\
-		&I_2=integral sin[(1-pi)x]dif x=1/(1-pi)integral sin[(1-pi)x]dif[(1-pi)x]=-cos[(1-pi)x]/(1-pi)+C_2
-	$所以原积分可表示为$
-		1/2I_1+1/2I_2=-cos[(1+pi)x]/(2+2pi)-cos[(1-pi)x]/(2-2pi)+C
+		integral sin x cos pi x dif x=1/2Int(#1,integral sin[(1+pi)x]dif x)+1/2Int(#2,integral sin[(1-pi)x]dif x)
+	$分别解这两个积分，得到#multi-eq[$
+		Int(#1,I_1=integral sin[(1+pi)x]dif x)=1/(1+pi)integral sin[(1+pi)x]dif[(1+pi)x]=-cos[(1+pi)x]/(1+pi)+C_1$$
+		Int(#2,I_2=integral sin[(1-pi)x]dif x)=1/(1-pi)integral sin[(1-pi)x]dif[(1-pi)x]=-cos[(1-pi)x]/(1-pi)+C_2
+	$]所以原积分可表示为$
+		1/2Int(#1,I_1)+1/2Int(#2,I_2)=-cos[(1+pi)x]/(2+2pi)-cos[(1-pi)x]/(2-2pi)+C
 	$],
 )
 #comment[
@@ -287,12 +287,12 @@
 	question:$integral cos x cos(x+a)dif x$,
 	answer:[$
 		integral cos x cos(x+a)dif x=&integral cos x (cos x cos a-sin x sin a)dif x\
-		=&cos a integral cos^2x dif x-sin a cos x sin x dif x
-	$分别解这两个积分，得到$
-		&I_1=integral cos^2x dif x=integral (1+cos 2x)/2 dif x=integral (dif x)/2+integral (cos 2x)/4dif(2x)=x/2+1/4sin 2x+C_1\
-		&I_2=integral cos x sin x dif x=integral sin x dif sin x=1/2sin^2 x+C_2
-	$所以原积分可表示为$
-		I_1cos a-I_2sin a=x/2cos a+1/4sin 2x cos a-1/2sin^2x sin a+C
+		=&cos a Int(#1,integral cos^2x dif x)-Int(#2,integral sin a cos x sin x dif x)
+	$分别解这两个积分，得到#multi-eq[$
+		Int(#1,I_1=integral cos^2x dif x)=integral (1+cos 2x)/2 dif x=integral (dif x)/2+integral (cos 2x)/4dif(2x)=x/2+1/4sin 2x+C_1$$
+		Int(#2,I_2=integral cos x sin x dif x)=integral sin x dif sin x=1/2sin^2 x+C_2
+	$]所以原积分可表示为$
+		Int(#1,I_1)cos a-Int(#2,I_2)sin a=x/2cos a+1/4sin 2x cos a-1/2sin^2x sin a+C
 	$],
 )
 #comment[

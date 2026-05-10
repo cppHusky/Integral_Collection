@@ -41,8 +41,8 @@
 	show math.equation:set text(
 		font:"New Computer Modern Math",
 	)
-	//行内数学公式均使用行间格式，且保持CJK间距
-	show math.equation.where(block:false):it=>math.display(it)
+	show math.equation:it=>math.display(it)
+	//令行内数学公式保持CJK间距
 	show math.equation.where(block:false):it=>{
 		let ghost=text(font:"Adobe Blank","\u{375}")
 		ghost;it;ghost

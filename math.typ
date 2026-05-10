@@ -6,3 +6,16 @@
 #let arcosh=$op("arcosh")$
 #let artanh=$op("artanh")$
 #let mod=math.class("binary",math.mod)
+#let cases(..args)=math.cases(
+	..args.named(),
+	..args.pos().map(it=>{
+		let arr=()
+		for elem in it.children{
+			if repr(elem)=="align-point()"{
+				arr.push(math.display(sym.space))
+			}
+			arr.push(math.display(elem))
+		}
+		arr.join()
+	}),
+)

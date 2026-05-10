@@ -1,5 +1,31 @@
 #import "../utils.typ":question,comment,subst,ref,multi-eq
-#import "../math.typ":ee,ii,mod
+#import "../math.typ":*
+#question(
+	tag:"1/(ax^2+bx+c)",
+	category:red,
+	question:$integral (dif x)/(a x^2+b x+c) space(a>0)$,
+	answer:[当$b^2-4a c<0$时，$
+		integral (dif x)/(a x^2+b x+c)=&integral (dif x)/((sqrt(a)x+b/(2sqrt(a)))^2+c-b^2/(4a))\
+		=&1/sqrt(a)integral dif(sqrt(a)x+b/(2sqrt(a)))/((sqrt(a)x+b/(2sqrt(a)))^2+(4a c-b^2)/(4a))\
+		=&1/sqrt(a)dot (2sqrt(a))/sqrt(4a c-b^2)arctan (2sqrt(a)(sqrt(a)x+b/(2sqrt(a))))/sqrt(4a c-b^2)+C_1\
+		=&2/sqrt(4a c-b^2)arctan (2a x+b)/sqrt(4a c-b^2)+C_1
+	$当$b^2-4a c=0$时，$
+		integral (dif x)/(a x^2+b x+c)=&1/sqrt(a)integral dif(sqrt(a)x+b/(2sqrt(a)))/(sqrt(a)x+b/(2sqrt(a)))^2\
+		=&-1/sqrt(a)dot 1/(sqrt(a)x+b/(2sqrt(a)))+C_2\
+		=&-2/(2a x+b)+C_2\
+	$当$b^2-4a c>0$时，$
+		integral (dif x)/(a x^2+b x+c)=&1/a integral (dif x)/((x-(-b-sqrt(b^2-4a c))/(2a))(x-(-b+sqrt(b^2-4a c))/(2a)))\
+		=&1/sqrt(b^2-4a c)(integral (dif x)/(x+(b-sqrt(b^2-4a c))/(2a))-integral (dif x)/(x+(b+sqrt(b^2-4a c))/(2a)))\
+		=&1/sqrt(b^2-4a c)log abs((x+(b-sqrt(b^2-4a c))/(2a))/(x+(b+sqrt(b^2-4a c))/(2a)))+C_3\
+		=&1/sqrt(b^2-4a c)log abs((2a x+b-sqrt(b^2-4a c))/(2a x+b+sqrt(b^2-4a c)))+C_3
+	$综上所述，得到$
+		integral (dif x)/(a x^2+b x+c)=cases(
+			2/sqrt(4a c-b^2)arctan (2a x+b)/sqrt(4a c-b^2)+C_1\,&b^2-4a c<0,
+			-2/(2a x+b)+C_2\,&b^2-4a c=0,
+			1/sqrt(b^2-4a c)log abs((2a x+b-sqrt(b^2-4a c))/(2a x+b+sqrt(b^2-4a c)))+C_3\,&b^2-4a c>0,
+		)
+	$],
+)
 #question(
 	tag:"1/(x(x^5+1)^3)",
 	category:red,

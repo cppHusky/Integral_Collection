@@ -340,7 +340,7 @@
 	tag:"1/sqrt(x^2+1)",
 	category:red,
 	question:$integral (dif x)/sqrt(x^2+1)$,
-	answer:[令$subst(x=tan t\,space t in (-pi/2,pi/2))$，则$
+	answer:[令$subst(x=tan t,t in (-pi/2,pi/2))$，则$
 		integral (dif x)/sqrt(x^2+1)=integral (dif tan t)/(sec t)=integral sec t dif t=log(sec t+tan t)+C=log(sqrt(x^2+1)+x)+C
 	$],
 )
@@ -353,9 +353,9 @@
 	tag:"1/sqrt(x^2-4)",
 	category:blue,
 	question:$integral 1/sqrt(x^2-4)$,
-	answer:[当$x>2$时，令$subst(x=2cosh t\,t in(0,+infinity))$，则$subst(sqrt(x^2-4)=2sinh t)$，所以$
+	answer:[当$x>2$时，令$subst(x=2cosh t,t in(0,+infinity))$，则$subst(sqrt(x^2-4)=2sinh t)$，所以$
 		integral (dif x)/sqrt(x^2-4)=integral dif(2cosh t)/(2sinh t)=integral dif t=arcosh x/2+C=log abs(x+sqrt(x^2-4))+C_1
-	$当$x<-2$时，令$subst(x=-2cosh t\,t in(0,+infinity))$，则$subst(sqrt(x^2-4)=2sinh t)$，所以$
+	$当$x<-2$时，令$subst(x=-2cosh t,t in(0,+infinity))$，则$subst(sqrt(x^2-4)=2sinh t)$，所以$
 	integral (dif x)/sqrt(x^2-4)=-integral dif(2cosh t)/(2sinh t)=-t+C=-arcosh(-x/2)+C=log abs(x+sqrt(x^2-4))+C_2
 	$综上所述，得到$
 		integral (dif x)/sqrt(x^2-4)=log abs(x+sqrt(x^2-4))+C
@@ -363,13 +363,13 @@
 )
 #comment[
 	相较于三角换元，双曲换元是一种不常用的方法，主要用于处理形如$sqrt(x^2plus.minus a^2)$的积分问题。一般来说，根式$sqrt(x^2+a^2)$需要使用$subst(x=a sinh t)$换元，并限制$t in RR$，开根号无需带绝对值。#parbreak()
-	而根式$sqrt(x^2-a^2)$有所不同，在使用$subst(x=plus.minus a cosh t)$换元时，需要对$x$分区间以决定正负号。
+	而根式$sqrt(x^2-a^2)$有所不同，在使用$subst(x=+-a cosh t)$换元时，需要对$x$分区间以决定正负号。
 ]
 #question(
 	tag:"(logx)/(x^2-1)^(3/2)",
 	category:red,
 	question:$integral (log x)/(x^2-1)^(3/2)dif x$,
-	answer:[令$subst(x=sec t\,t in(0,pi/2))$，则$subst(sqrt(x^2-1)=tan x)$，所以$
+	answer:[令$subst(x=sec t,t in(0,pi/2))$，则$subst(sqrt(x^2-1)=tan x)$，所以$
 		integral (log x)/sqrt(x^2-1)^3dif x=&integral (log sec t dif sec t)/(tan^3t)\
 		=&integral (cos t log sec t)/(sin^2t)dif t\
 		=&integral (log sec t)/(sin^2t)dif sin t\
@@ -417,7 +417,7 @@
 	tag:"x^2sqrt(x+1)",
 	category:red,
 	question:$integral x^2sqrt(x+1)dif x$,
-	answer:[令$subst(x=t^2-1\,t in [0,+infinity))$，则$subst(sqrt(x+1)=t)$，所以$
+	answer:[令$subst(x=t^2-1,t in [0,+infinity))$，则$subst(sqrt(x+1)=t)$，所以$
 		integral x^2sqrt(x+1)dif x=&integral (t^2-1)^2t dif(t^2-1)\
 		=&2integral (t^6-2t^4+t^2)dif t\
 		=&2/7t^7-4/5t^5+2/3t^3+C\
@@ -432,7 +432,7 @@
 	tag:"1/(sqrt(x)+root(3,x))",
 	category:red,
 	question:$integral (dif x)/(sqrt(x)+root(3,x))$,
-	answer:[令$subst(x=t^6\,t in(0,+infinity))$，则$ 
+	answer:[令$subst(x=t^6,t in(0,+infinity))$，则$ 
 		integral (dif x)/(sqrt x+root(3,x))=&integral (dif t^6)/(t^3+t^2)\
 		=&6integral t^3/(t+1)dif t\
 		=&6integral (t^3+t^2-t^2-t+t+1-1)/(t+1)dif t\

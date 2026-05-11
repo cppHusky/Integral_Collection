@@ -48,9 +48,9 @@
 	body
 	parbreak()
 }
-#let subst(body)={
+#let subst(..args)={
 	set text(fill:purple)
-	body
+	args.pos().join($,$)
 }
 #let Int(..args)={
 	let args=args.pos()

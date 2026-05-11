@@ -213,6 +213,15 @@
 	这种方法能避开配方$integral (dif x)/sqrt((x+1/2)^2-1/4)$再求解的过程，但需要注意拆根式时考虑$x$的取值范围，否则容易产生错解。
 ]
 #question(
+	tag:"x^5/sqrt(x^3+1)",
+	category:red,
+	question:$integral x^5sqrt(x^3+1)dif x$,
+	answer:[$
+		integral x^5sqrt(x^3+1)dif x=1/3integral x^3sqrt(x^3+1)dif x^3
+	$令$subst(x^3=t^2-1,in [0,+infinity))$
+	],
+)
+#question(
 	tag:"sin^5x",
 	category:blue,
 	question:$integral sin^5x dif x$,

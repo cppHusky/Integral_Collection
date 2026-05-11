@@ -1,4 +1,4 @@
-#import "../utils.typ":question,comment,subst,ref,multi-eq,Int
+#import "../utils.typ":question,comment,subst,ref,multi-eq,Int,noindent
 #import "../math.typ":*
 #question(
 	tag:"1/(ax^2+bx+c)",
@@ -217,10 +217,243 @@
 	category:red,
 	question:$integral x^5sqrt(x^3+1)dif x$,
 	answer:[$
-		integral x^5sqrt(x^3+1)dif x=1/3integral x^3sqrt(x^3+1)dif x^3
-	$令$subst(x^3=t^2-1,in [0,+infinity))$
-	],
+		integral x^5sqrt(x^3+1)dif x=1/3Int(integral x^3sqrt(x^3+1)dif x^3)
+	$令$subst(x^3=t^2-1,t in[0,+infinity))$，则$subst(t=sqrt(x^3+1))$，所以$
+		Int(1/3integral x^3sqrt(x^3+1)dif x^3)=&1/3integral (t^2-1)t dif t^2\
+		=&2/3integral (t^4-t^2)dif t\
+		=&2/15t^5-2/9t^3+C\
+		=&2/15sqrt(x^3+1)^5-2/9sqrt(x^3+1)^3+C
+	$],
 )
+#comment[
+	这是切比雪夫定理在处理无理函数积分时的应用。这里要解决的主要问题是$sqrt(x^3+1)$。为了简化计算，可以考虑整体换元$subst(u=x^3)$再进一步操作，因而需要适当凑微分。这里将$subst(u=x^3)$与接下来消根式的换元$subst(u=t^2-1)$合并成了一步，读者在熟练掌握切比雪夫定理后也会熟悉这样的操作。#parbreak()
+	有关切比雪夫定理的内容，可见/*ref*/。
+]
+#question(
+	tag:"sqrt(x/(x+1))",
+	category:red,
+	question:$integral sqrt(x/(x+1))dif x$,
+	answer:[令$subst(t=sqrt(x/(x+1)),t in[0,1)union(1,+infinity))$，则$x=t^2/(1-t^2)$，所以$
+		integral sqrt(x/(x+1))dif x=&integral t dif t^2/(1-t^2)\
+		=&integral t dif(1/(1-t^2)-1)\
+		=&integral t dif 1/(1-t^2)\
+		=&t/(1-t^2)-integral (dif t)/(1-t^2)\
+		=&t/(1-t^2)-1/2log abs((t-1)/(t+1))+C\
+		=&(x+1)sqrt(x/(x+1))+1/2log abs((sqrt(x/(x+1))-1)/(sqrt(x/(x+1))+1))+C
+	$],
+)
+#comment[
+	这也是切比雪夫定理的一种常见用法，一般叫做分式线性替换。#parbreak()
+	在解题过程中，当换元得到$integral t dif t^2/(1-t^2)$后，不要一股脑地直接求导化成$-2integral (t^2dif t)/(t^2-1)^2$。显然先分部积分之后再做会更轻松。#parbreak()
+	另外，不要对结果中的$abs((sqrt(x/(x+1))-1)/(sqrt(x/(x+1))+1))$画蛇添足化简成$abs((sqrt(x)-sqrt(x-1))/(sqrt(x)+sqrt(x-1)))$。这是因为，上述化简操作必须经过一步拆根式$sqrt(x/(x+1))=sqrt(x)/sqrt(x+1)$的操作，而这么做的前提是$x in[0,+infinity)$。然而，实际上被积函数的定义域是$(-infinity,-1)union[0,+infinity)$，并不满足拆根式的要求，会产生错解。#parbreak()
+	同理，$(x+1)sqrt(x/(x+1))$也不能直接化简为$sqrt(x(x+1))$。正确的操作应该是$(x+1)sqrt(x/(x+1))=(x+1)sqrt(x(x+1))/abs(x+1)=sgn(x+1)sqrt(x(x+1))$。显然，这样的化简适得其反，结果看起来更不自然了，不如保留原样。
+]
+#question(
+	tag:"sqrt(x(x+1))",
+	category:red,
+	question:$integral sqrt(x(x+1))dif x$,
+	answer:[令$subst(t=sqrt(x/(x+1)),t in[0,1)union(1,+infinity))$，则$x=t^2/(1-t^2)$，所以$
+		integral sqrt(x(x+1))dif x=&integral sqrt(t^2/(1-t^2)dot 1/(1-t^2))dif t^2/(1-t^2)\
+		=&integral sqrt(t^2/(1-t^2)^2)dif(t^2/(1-t^2)-1)\
+		=&integral t/abs(1-t^2)dif 1/(1-t^2)\
+		=&sgn(1-t^2)integral t/(1-t^2)dif 1/(1-t^2)\
+		=&1/2sgn(1-t^2)integral t dif 1/(1-t^2)^2\
+		=&t/(2(1-t^2)^2)sgn(1-t^2)-1/2sgn(1-t^2)Int(integral (dif t)/(t^2-1)^2)
+	$接下来解$Int(integral (dif t)/(t^2-1)^2)$：$
+		Int(integral (dif t)/(t^2-1)^2)=1/4integral (1/(t-1)-1/(t+1))^2dif t\
+		=&1/4integral (dif t)/(t-1)^2-1/2integral (dif t)/(t^2-1)+1/4integral (dif t)/(t+1)^2\
+		=&-1/(4t-4)-1/4log abs((t-1)/(t+1))-1/(4t+4)+C_1
+	$所以$
+		&integral sqrt(x(x+1))dif x\
+		=&t/(2(1-t^2)abs(1-t^2))-1/2[Int(-1/(4t-4)-1/(4t+4)-1/4log abs((t-1)/(t+1)))]sgn(1-t^2)+C\
+		=&t/(2(1-t^2)abs(1-t^2))-t/(4abs(1-t^2))+1/8log abs((t-1)/(t+1))sgn(1-t^2)+C\
+		=&(2x+1)/4sqrt(x(x+1))+1/8log abs((sqrt(x/(x+1))-1)/(sqrt(x/(x+1))+1))sgn(x+1)+C
+	$],
+)
+#comment[
+	这是切比雪夫定理的一个应用。此处依然要注意开偶次根式的诸多问题。另外，对于积分$integral (dif t)/(t^2-1)^2$，这里的做法是先在括号内进行裂项，把被积函数变成$1/4(1/(t-1)-1/(t+1))^2$，再进行二项式展开和后续操作，也不失为一种好方法。#parbreak()
+	本题也是二次根式积分问题，还可以用三角换元做，或者仿照#ref("sqrt(x^2+1)")的解法作分部积分，请读者自行尝试。
+]
+#question(
+	tag:"1/root(3,x^3+1)",
+	category:red,
+	question:$integral (dif x)/root(3,x^3+1)$,
+	answer:[$
+		integral (dif x)/root(3,x^3+1)=1/3integral (x^2dif x)/(x^2root(3,x^3+1))=1/3integral (dif x^3)/(x^2root(3,x^3+1))
+	$令$subst(t=root(3,(x^3+1)/x^3))$，则$x^3=1/(t^3-1)$，所以$
+		1/3integral (dif x^3)/(x^2root(3,x^3+1))=1/3integral (dif 1/(t^3-1))/(root(3,(1/(t^3-1))^2dot t^3/(t^3-1)))=1/3integral (dif 1/(t^3-1))/(t/(t^3-1))=Int(integral (-t dif t)/(t^3-1))
+	$设$(-t)/(t^3-1)=A/(t-1)+B/(t^2+t+1)$，用留数法求出#multi-eq[$
+		A=&lr((-t)/(t^2+t+1)|)_(t-1=0)=-1/3$$
+		B=&lr((-t)/(t-1)|)_(t^2+t+1=0)=lr(-t(t+2)/(t^2+t-2)|)_(t^2+t+1=0)=(t-1)/3
+	$]所以$
+		&Int(integral (-t dif t)/(t^3-1))\
+		=&-1/3integral (dif t)/(t-1)+1/3integral (t-1)/(t^2+t+1)dif t\
+		=&-1/3log abs(t-1)+1/6integral (2t+1)/(t^2+t+1)dif t-1/2integral (dif t)/(t^2+t+1)\
+		#let u=$root(3,(x^3+1)/x^3)$
+		=&-1/3log abs(#u -1)+1/6log(#u^2+#u+1)-1/sqrt(3)arctan (2root(3,x^3+1)+x)/(sqrt(3)x)+C\
+		#let u=$root(3,x^3+1)$
+		=&-1/3log abs((#u -x)/x)+1/6log (#u^2+x#u+x^2)/x^2-1/sqrt(3)arctan (2root(3,x^3+1)+x)/(sqrt(3)x)+C
+	$],
+)
+#comment[
+	这里用到了类似于$root(3,(x^3+1)/x^3)=root(3,x^3+1)/x$的操作，因为根式是奇数次的，开根式不需要有顾虑。
+]
+#question(
+	tag:"x/sqrt(1+root(3,x^2))",
+	question:$integral (x dif x)/sqrt(1+root(3,x^2))$,
+	answer:$
+		integral (x dif x)/sqrt(1+root(3,x^2))=&1/2integral (dif x^2)/sqrt(1+root(3,x^2))\
+		=&1/2integral (dif t^3)/sqrt(t+1)quad subst(t=root(3,x^2)in[0,+infinity))\
+		=&3/2integral (t^2dif t)/sqrt(t+1)\
+		#let u=$sqrt(t+1)$
+		=&3integral [#u^2-1]^2dif #u\
+		=&3/5#u^5-2#u^3+3#u+C\
+		#let u=$sqrt(root(3,x^2)+1)$
+		=&3/5#u^5-2#u^3+3#u+C
+	$,
+)
+#comment[
+	本题初看比较棘手，但只要敢于试探就会发现并不难做。对$integral (t^2 dif t)/sqrt(t+1)$最标准的做法是使用切比雪夫定理，再令$subst(t=u^2-1,u in[0,+infinity))$，不过这里图方便直接凑微分$dif sqrt(x+1)$了。
+]
+#question(
+	tag:"1/sqrt(tanx)",
+	category:red,
+	question:$integral (dif x)/sqrt(tan x)$,
+	answer:$
+		integral (dif x)/sqrt(tan x)=&integral (dif tan x)/((tan^2 x+1)sqrt(tan x))\
+		=&integral (dif u^2)/u(u^4+1)quad subst(u=sqrt(tan x))\
+		=&2integral (dif u)/(u^4+1)\
+		=&integral (u^2+1)/(u^4+1)dif u-integral (u^2-1)/(u^4+1)dif u\
+		=&integral dif(u-u^(-1))/((u-u^(-1))^2+2)-integral dif(u+u^(-1))/((u+u^(-1))^2-2)\
+		=&1/sqrt(2)arctan (u-u^(-1))/sqrt(2)-1/(2sqrt(2))log abs((u+u^(-1)-sqrt(2))/(u+u^(-1)+sqrt(2)))+C\
+		#let (u,v)=($sqrt(tan x)$,$sqrt(cot x)$)
+		=&1/sqrt(2)arctan (#u -#v)/sqrt(2)-1/(2sqrt(2))log abs((#u+#v -sqrt(2))/(#u -#v+sqrt(2)))+C
+	$,
+)
+#comment[
+	此类问题有一个潜在规律：如果被积函数是关于$tan x$的有理函数（或某些特定的无理函数），那么直接凑微分$dif tan x$即可解决问题。至于$integral (dif u)/(u^4+1)$的解法，就与#ref("(3x^2+1)/(x^4+1)")相同了。
+]
+#question(
+	tag:"1/(xsqrt(x^2+1))",
+	category:red,
+	question:$integral (dif x)/(x sqrt(x^2+1))$,
+	answer:$
+		integral (dif x)/(x sqrt(x^2+1))=&integral (dif x)/(x abs(x)sqrt(1-x^(-2)))\
+		=&sgn x integral (dif x)/(x^2sqrt(x^(-2)+1))\
+		=&-sgn x integral (dif x^(-1))/sqrt(x^(-2)+1)\
+		=&-log(x^(-1)+sqrt(x^(-2)+1))sgn x+C\
+		=&-log(1/x+sqrt(1+1/x^2))sgn x+C
+	$,
+)
+#comment[
+	本题是倒代换思路的一种体现，通过倒代换的方式将原问题转化成#ref("1/sqrt(x^2+1)")一类的已知问题。这里需要十分注意，从二次根式中提取因式时应带绝对值符号，否则将产生错解。#parbreak()
+	顺带一提，本题的结果式还可以继续化简。当$x>0$时有$-log(1/x+sqrt(1+1/x^2))=log x/(1+sqrt(x^2+1))=log (sqrt(x^2+1)-1)/x$；当$x<0$时有$log(1/x+sqrt(1+1/x^2))=log (1-sqrt(x^2+1))/x=log (sqrt(x^2+1)-1)/(-x)$。整理一下可以得到更简洁的结果：$integral (dif x)/(x sqrt(x^2+1))=log (sqrt(x^2+1)-1)/abs(x)+C$。
+]
+#question(
+	tag:"1/(x^2sqrt(x^2-1))",
+	category:red,
+	question:$integral (dif x)/(x^2sqrt(x^2-1))$,
+	answer:$
+		integral (dif x)/(x^2sqrt(x^2-1))=&integral (dif x)/(x^2abs(x)(1-x^(-2)))\
+		=&sgn x integral (dif x)/(x^3sqrt(1-x^(-2)))\
+		=&-1/2sgn x integral (dif x^(-2))/(1-x^(-2))\
+		=&sqrt(1-x^(-2))sgn x+C\
+		=&sqrt(x^2-1)/x+C
+	$,
+)
+#comment[
+	本题和#ref("1/(xsqrt(x^2+1))")是相似的，都是旨在通过凑微分的方法向熟知的积分靠拢，以期避开三角/双曲换元来解决问题。#parbreak()
+	事实上，解决这类二次根式积分时笔者不再建议使用三角/双曲换元了。读者可以只依靠已有的二次根式积分公式（见#ref("1/sqrt(ax^2+bx+c)")）和熟练的恒等变换、凑微分技巧来解决问题。#parbreak()
+	不建议使用换元的原因在于，解题过程中常常出现因参数取值范围问题导致的错解。例如，要消掉$sqrt(1-x)$的根号，就不能用换元$x=sin t$再套二倍角公式，因为无论如何规定$t$的取值范围，$x$的值域都只能在$[-1,1]$之内，而无法涵盖$x in(-infinity,-1)$的部分。
+]
+#question(
+	tag:"1/sqrt(e^2x+e^x+1)",
+	category:red,
+	question:$integral (dif x)/sqrt(ee^(2x)+ee^x+1)$,
+	answer:$
+		integral (dif x)/sqrt(ee^(2x)+ee^x+1)=&integral (ee^(-x)dif x)/sqrt(1+ee^(-x)+ee^(-2x))\
+		=&-integral (dif ee^(-x))/sqrt(ee^(-2x)+ee^(-x)+1)\
+		=&-integral (dif u)/sqrt(u^2+u+1)quad subst(u=ee^(-x))\
+		=&-integral dif(u+1/2)/sqrt((u+1/2)^2+(sqrt(3)/2)^2)\
+		#let u=$(2u+1)/sqrt(3)$
+		=&-integral dif(#u)/sqrt((#u)^2+1)\
+		=&-log(#u+sqrt((4u^2+4u+4)/3))+C\
+		=&-log(2ee^(-x)+1+2sqrt(ee^(-2x)+ee^(-x)+1))+C
+	$,
+)
+#comment[
+	正常的有理化思路都是凑$dif ee^x$换元消掉指数函数，将原积分变为常见的无理函数积分来处理。但是有些时候通过被积函数的结构可以发现凑$dif ee^(-x)$将是更简单的选择。#parbreak()
+	倘若用$subst(t=ee^x)$将原式化为$integral (dif t)/(t sqrt(t^2+t+1))$，那也是倒代换$subst(u=1/t)$解决起来更方便。因此一开始就令$subst(u=ee^(-x))$相当于把倒代换操作一并完成了。
+]
+#question(
+	tag:"1/((x+2)sqrt(x^2+1))",
+	category:red,
+	question:$integral (dif x)/((x+2)sqrt(x^2+1))$,
+	answer:[令$subst(t=1/(x+2))$，则$subst(x=1/t-2)$，所以$
+		&integral (dif x)/((x+2)sqrt(x^2+1))\
+		=&integral t/sqrt(1/t^2-4/t+5)dif 1/t\
+		=&-sgn t integral (dif t)/sqrt(5t^2-4t+1)\
+		#let u=$sqrt(5)t-2/sqrt(5)$
+		=&-1/sqrt(5)sgn t integral dif(#u)/sqrt((#u)^2+(1/sqrt(5))^2)\
+		=&-1/sqrt(5)sgn t integral dif(5t-2)/sqrt((5t-2)^2+1)\
+		=&-1/sqrt(5)log(5t-2+sqrt(25t^2-20t+5))sgn t+C\
+		=&-1/sqrt(5)log(5/(x+2)-2+sqrt(25/(x+2)^2-20/(x+2)+5))sgn(x+2)+C
+	$],
+)
+#comment[
+	这种方法本质上也是倒代换，只不过在此处倒代换需要将$x^2+1)$也表示为关于$x+2$的多项式，不太直观，所以就用中间变量$subst(t=1/(x+2))$来辅助一下。
+]
+#question(
+	tag:"sqrt(1-x^2)/(1+x)",
+	category:blue,
+	question:$integral sqrt(1-x^2)/(1+x)dif x$,
+	answer:$
+		integral sqrt(1-x^2)/(1+x)dif x=&integral (1-x^2)/((1+x)sqrt(1-x^2))dif x\
+		=&integral (1-x)/sqrt(1-x^2)dif x\
+		=&integral (dif x)/sqrt(1-x^2)-integral (x dif x)/sqrt(1-x^2)\
+		=&arcsin x+sqrt(1-x^2)+C
+	$,
+)
+#comment[
+	本题体现了含$sqrt(a x^2+b x+c)quad(a!=0)$类型积分中的一个重要原则：若被积函数的根号位于分子，则将其放到分母。因为根式与多项式不同，放在分子上也无法分项，没有拼凑的可能；但如果把根号放在分母，就可以根据分母的情况来适当拼凑分子。#parbreak()
+	此外，很多常用函数的导数都是根号在分母的形式，比如#multi-eq[$
+		(dif arcsin x)/(dif x)=1/sqrt(1-x^2),$$
+		(dif log abs(x+sqrt(x^2+-1)))/(dif x)=1/sqrt(x^2+-1),$$
+		(dif sqrt(x^2+1))/(dif x)=x/(x^2+-1).
+	$]
+	#noindent 所以如果根号是在分母上，那么凑相应的求导公式就会更简单，比如#ref("sqrt(e^2x+e^x+1)")。
+]
+#question(
+	tag:"sqrt(x^2+1)",
+	category:red,
+	question:$integral sqrt(x^2+1)dif x$,
+	answer:[$
+		Int(integral sqrt(x^2+1)dif x)=&integral (x^2dif x)/sqrt(x^2+1)+integral (dif x)/sqrt(x^2+1)\
+		=&integral x dif sqrt(x^2+1)+log(x+sqrt(x^2+1))\
+		=&x sqrt(x^2+1)-Int(integral sqrt(x^2+1)dif x)+log(x+sqrt(x^2+1))
+	$对该式移项得$
+		2Int(integral sqrt(x^2+1)dif x)=&x sqrt(x^2+1)+log(x+sqrt(x^2+1))+C\
+		Int(integral sqrt(x^2+1)dif x)=&1/2x sqrt(x^2+1)+1/2log(x+sqrt(x^2+1))+C_1
+	$],
+)
+#question(
+	tag:"x^2/sqrt(x^2+1)",
+	category:red,
+	question:$integral (x^2dif x)/sqrt(x^2+1)$,
+	answer:[$
+		Int(integral (x^2dif x)/sqrt(x^2+1))=&1/2integral (x dif x^2)/(sqrt(x^2+1))\
+		=&integral x dif sqrt(x^2+1)\
+		=&x sqrt(x^2+1)-integral sqrt(x^2+1)dif x\
+		=&x sqrt(x^2+1)-integral (x^2dif x)/sqrt(x^2+1)-integral (dif x)/sqrt(x^2+1)\
+		=&x sqrt(x^2+1)-log(x+sqrt(x^2+1))-Int(integral (x^2dif x)/sqrt(x^2+1))
+	$对该式移项得$
+		2Int(integral (x^2dif x)/sqrt(x^2+1))=&x sqrt(x^2+1)-log(x+sqrt(x^2+1))+C\
+		Int(integral (x^2dif x)/sqrt(x^2+1))=&x/2sqrt(x^2+1)-1/2log(x+sqrt(x^2+1))+C_1
+	$],
+)
+#comment[
+	这两题都用到了分部积分法，且思路一致，都把原积分化成了两个待解问题：一个是原积分本身，另一个是$integral (dif x)/sqrt(x^2+1)$（它的解法见#ref("1/sqrt(x^2+1)")）。这样一来只要通过移项，就可以把原积分用其它已知结论表达出来。
+]
 #question(
 	tag:"sin^5x",
 	category:blue,

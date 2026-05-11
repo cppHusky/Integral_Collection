@@ -87,7 +87,9 @@
 		center,
 		block({
 			show math.equation:set align(left)
+			show math.equation:set par(first-line-indent:0em)
 			body
 		})
 	)
 }
+#let noindent=h(-2em)

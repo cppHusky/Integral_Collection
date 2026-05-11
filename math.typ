@@ -1,3 +1,4 @@
+#import "@preview/quick-maths:0.2.1":shorthands
 #let ee=$bb(e)$
 #let ii=$bb(i)$
 #let sgn=$op("sgn")$
@@ -19,3 +20,12 @@
 		arr.join()
 	}),
 )
+#let math-shorthands(body)={
+	show:shorthands.with(
+		($+-$,$plus.minus$),
+		($++$,$class("binary",+)$),
+		($--$,$class("binary",-)$),
+		($<-$,$< -$),
+	)
+	body
+}

@@ -27,4 +27,5 @@
 #pagebreak(weak:true,to:"odd")
 == 难度五
 #question-id.update(5000)
+#include "collection/level-5.typ"
 #pagebreak(weak:true,to:"odd")

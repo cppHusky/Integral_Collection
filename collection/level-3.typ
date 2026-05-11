@@ -1,4 +1,4 @@
-#import "../utils.typ":question,comment,subst,ref,multi-eq
+#import "../utils.typ":question,comment,subst,ref,multi-eq,Int
 #import "../math.typ":*
 #question(
 	tag:"1/(ax^2+bx+c)",
@@ -26,6 +26,44 @@
 		)
 	$],
 )
+#comment[
+	这是一个有理函数积分通式，更简洁的版本见@通题通解。如果读者可以记忆，将有助于加快解题速度。这种情形非常常见，并且容易推导通式，所以之后的题目中不再给出解决这个问题的具体过程。
+]
+#question(
+	tag:"(2x+1)/((x-1)(x-2)(x+3))",
+	category:red,
+	question:$integral (2x+1)/((x-1)(x-2)(x+3))dif x$,
+	answer:[设$(2x+1)/((x-1)(x-2)(x-3))=A/(x-1)+B/(x-2)+C/(x+3)$，用留数法求出#multi-eq[$
+		A=lr((2x+1)/((x-2)(x+3))|)_(x-1=0)=-3/4$$
+		B=lr((2x+1)/((x-1)(x+3))|)_(x-2=0)=1$$
+		C=lr((2x+1)/((x-1)(x-2))|)_(x+3=0)=-1/4
+	$]所以$
+		integral (2x+1)/((x-1)(x-2)(x+3))dif x=&-3/4integral (dif x)/(x-1)+integral (dif x)/(x-2)-1/4(dif x)/(x+3)\
+		=&-3/4log abs(x-1)+log abs(x-2)-1/4log abs(x+3)+C
+	$],
+)
+#comment[
+	这是留数法在有理函数裂项中的应用，本题是最简单的、分母只含一次单因式的情形。#parbreak()
+	它的基本处理方法是：要确定所设的一个待定式，就将相应的分母$x-a$从原因式的分母中消去，再代入$x-a=0$（或$x=a$将这个式子解出，从而求得待定式。#parbreak()
+	关于留数法裂项的推导和详细操作，可以参考/*ref*/。
+]
+#question(
+	tag:"1/(x^2(x+1)^2)",
+	category:red,
+	question:$integral (dif x)/(x^2(x+1)^2)$,
+	answer:[设$1/(x^2(x+1)^2)=A/x^2+B/x+D/(x+1)^2+E/(x+1)$，用留数法求出#multi-eq[$
+		A=lr(1/(x+1)^2|)_(x=0)=1$$
+		B=lr((dif 1/(x+1)^2)/(dif x)|)_(x=0)=lr(-2/(x+1)|)_(x=0)=-2$$
+		D=lr(1/x^2|)_(x+1=0)=1$$
+		E=lr((dif 1/x^2)/(dif(x+1))|)_(x+1=0)=lr(-2/x^3|)_(x+1=0)=2
+	$]所以$
+		integral (dif x)/(x^2(x+1)^2)=&integral (dif x)/x^2-2integral (dif x)/x+integral (dif x)/(x+1)^2+2integral (dif x)/(x+1)\
+		=&-1/x-2log abs(x)-1/(x+1)+2log abs(x+1)+C
+	$],
+)
+#comment[
+	这是留数法在处理分母含一次重因式时的做法。裂项时设待定式的方式和待定系数法如出一辙，但后续操作有所不同。如果一个待定式对应的分母$(x-a)^n$和原式当中的重数相同，那么仿照#ref("(2x+1)/((x-1)(x-2)(x+3))")中的方法求未知量即可。而如果待定式的分母次数低于原式当中的重数，那么低$m$次就需要求$m$阶导再代入$x-a=0$，最后还要记得除$m!$。
+]
 #question(
 	tag:"1/(x(x^5+1)^3)",
 	category:red,
@@ -84,6 +122,31 @@
 	这些方法本质上都是裂项方法的延伸，不要求读者一定掌握。读者可以选择自己习惯的方法来使用。
 ]
 #question(
+	tag:"x^2/(x^4-x^2+1)",
+	category:blue,
+	question:$integral x^2/(x^4-x^2+1)dif x$,
+	answer:[考虑到$
+		x^4+x^2+1=(x^2+1)^2-x^2=(x^2-x+1)(x^2+x+1)
+	$设$x^2/(x^4+x^2+1)=A/(x^2-x+1)+B/(x^2+x+1)$，用模法求出#multi-eq[$
+		A=&x^2/(x^2+x+1)mod(x^2-x+1)\
+		=&x^2/((x^2-x+1)+2x)mod(x^2-x+1)\
+		=&x^2/(2x)mod(x^2-x+1)\
+		=&x/2$$
+		B=&x^2/(x^2-x+1)mod(x^2+x+1)\
+		=&x^2/((x^2+x+1)-2x)mod(x^2+x+1)\
+		=&x^2/(-2x)mod(x^2+x+1)\
+		=&-x/2
+	$]所以$
+		&integral x^2/(x^4+x^2+1)dif x\
+		=&1/2integral x/(x^2-x+1)dif x-1/2integral x/(x^2+x+1)dif x\
+		=&1/4integral (2x-1)/(x^2-x+1)dif x+1/4integral (dif x)/(x^2-x+1)-1/4integral (2x+1)/(x^2+x+1)dif x+1/4integral (dif x)/(x^2+x+1)\
+		=&1/4log (x^2-x+1)/(x^2+x+1)+1/(2sqrt(3))arctan (2x-1)/sqrt(3)+1/(2sqrt(3))arctan (2x+1)/sqrt(3)+C
+	$],
+)
+#comment[
+	关于$x^4+k x^2+1 space(k<=2)$的因式分解，可以仿照本题中的平方差思路进行。
+]
+#question(
 	tag:"(x-2)/(x^4+2x^3-3x^2-4x+4)",
 	category:blue,
 	question:$integral (x-2)/(x^4+2x^3-3x^2-4x+4)dif x$,
@@ -100,14 +163,54 @@
 		=&-1/3dot (2x^2+8x+8-5x-22)/(4x^2+16x+16-9)mod(x^2+4x+4)\
 		=&-(5x+22)/27
 	$]所以$
-		integral (x-2)/(x^4+2x^3-3x^2-4x+4)dif x=&1/27integral (5x-8)/(x-1)^2dif x-1/27integral (5x+22)/(x+2)^2dif x\
+		&integral (x-2)/(x^4+2x^3-3x^2-4x+4)dif x\
+		=&1/27integral (5x-8)/(x-1)^2dif x-1/27integral (5x+22)/(x+2)^2dif x\
 		=&5/27integral (dif x)/(x-1)-1/9integral (dif x)/(x-1)^2-5/27integral (dif x)/(x+2)-4/9integral (dif x)/(x+2)^2\
 		=&5/27log abs((x-1)/(x+2))+1/(9(x-1))+4/(9(x+2))+C
 	$],
 )
 #comment[
-	本题的分母乍看比较复杂，不容易进行因式分解，此时可以尝试使用试根的方法。对于整系数多项式而言，可以将常数项的因数代入计算多项式的值（比如本题的$plus.minus 1,plus.minus 2,plus.minus 4$）。如果得到$0$，则这个数就是多项式的一个根，可以先行将它对应的因式分解出来，再对剩余部分继续如法炮制，从而逐步将原式分解完成。#parbreak()
+	本题的分母乍看比较复杂，不容易进行因式分解，此时可以尝试使用试根的方法。对于整系数多项式而言，可以将常数项的因数代入计算多项式的值（比如本题的$+-1,+-2,+-4$）。如果得到$0$，则这个数就是多项式的一个根，可以先行将它对应的因式分解出来，再对剩余部分继续如法炮制，从而逐步将原式分解完成。#parbreak()
 	另外，本题也涉及到分母含重因式时的模法应用。与留数法不同，模法要求只将分母中不同的因子分离开，而重因式的部分不再需要进一步分离。此处的$A,B$都是比分母低一次的待定多项式。
+]
+#question(
+	tag:"(3x^2+1)/(x^4+1)",
+	category:red,
+	question:$integral (3x^2+1)/(x^4+1)dif x$,
+	answer:[$
+		integral (3x^2+1)/(x^4+1)dif x=2Int(#1,integral (x^2+1)/(x^4+1)dif x)+Int(#2,integral (x^2-1)/(x^4+1)dif x)
+	$分别解这两个积分，得#multi-eq[$
+		Int(#1)=Int(#1,integral (x^2+1)/(x^4+1)dif x)=&integral (1+x^(-2))/(x^2+x^(-2))dif x\
+		=&integral dif(x-x^(-1))/((x-x^(-1))^2+2)\
+		=&1/sqrt(2)arctan (x-x^(-1))/sqrt(2)+C_1$$
+		Int(#2)=Int(#2,integral (x^2-1)/(x^4+1)dif x)=&integral (1-x^(-2))/(x^2+x^(-2))dif x\
+		=&integral dif(x+x^(-1))/((x+x^(-1))^2-2)\
+		=&1/(2sqrt(2))log abs((x+x^(-1)-sqrt(2))/(x+x^(-1)+sqrt(2)))+C_2
+	$]所以原积分可化为$
+		2Int(#1)+Int(#2)=sqrt(2)arctan (x-x^(-1))/sqrt(2)+1/(2sqrt(2))log abs((x+x^(-1)-sqrt(2))/(x+x^(-1)+sqrt(2)))+C
+	$],
+)
+#comment[
+	本题涉及到$integral (x^2+-1)/(x^4+1)dif x$的积分问题。这两个积分是可以通过裂项来解决的，分母因式分解的等式为$x^4+1=(x^2-sqrt(2)x+1)(x^2+sqrt(2)x+1)$。不过，倘若分子分母同除$x^2$凑对勾换元，就像本题中的$Int(#1)$和$Int(#2)$那样，解题就会更加快捷。#parbreak()
+	本题还有一个重要思路，就是积木法。一言以蔽之，积木法就是将难以解决的积分通过适当的分项转化成若干个容易解决的积分，从而解决原和分的过程。比如说，$integral (a x^2+b)/(x^4+1)dif x$是难以解决的积分，而$integral (x^2+1)/(x^4+1)dif x$和$integral (x^2-1)/(x^4+1)dif x$是相对容易解决的。那么，只要我们能将前者用后者表示出来，这个积分就可以解决了。积木法和前面介绍过的分项积分法原理相同。类似的更复杂问题还有#ref("(ax^5+bx^4+cx^3+dx^2+ex+f)/(x^6+1)")等。
+]
+#question(
+	tag:"1/sqrt(x(x+1))",
+	category:red,
+	question:$integral (dif x)/sqrt(x(x+1))$,
+	answer:[当$x>0$时，$
+		integral (dif x)/sqrt(x(x+1))=integral (dif x)/(sqrt(x)sqrt(x+1))=2integral dif(sqrt(x))/sqrt(sqrt(x)^2+1)=2log(sqrt(x)+sqrt(x+1))+C_1
+	$当$x<-1$时，$
+		integral (dif x)/sqrt(x(x+1))=integral (dif x)/(sqrt(-x)sqrt(-x-1))=-2integral dif(sqrt(-x))/sqrt(sqrt(-x)^2-1)=-2log(sqrt(-x)+sqrt(-x-1))+C_2
+	$综上所述，得到$
+		integral (dif x)/sqrt(x(x+1))=cases(
+			2log(sqrt(x)+sqrt(x+1))+C_1\,&x>0,
+			-2log(sqrt(-x)+sqrt(-x-1))+C_2\,&x<-1,
+		)
+	$],
+)
+#comment[
+	这种方法能避开配方$integral (dif x)/sqrt((x+1/2)^2-1/4)$再求解的过程，但需要注意拆根式时考虑$x$的取值范围，否则容易产生错解。
 ]
 #question(
 	tag:"sin^5x",

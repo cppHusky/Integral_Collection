@@ -31,13 +31,13 @@
 	answer
 	parbreak()
 }
-#let ref(id)=context link(
+#let ref(id)=context underline(link(
 	label(id),
 	text(
 		fill:luma(128),
 		font:"Noto Serif"
 	)[【Q#question-id.at(query(label(id)).first().location()).first()】]
-)
+))
 #let comment(body)={
 	parbreak()
 	set text(

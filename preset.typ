@@ -55,7 +55,6 @@
 		)
 		align(center,it)
 	}
-	show link:underline
 	body
 }
 #let preset-frontmatter(body)={

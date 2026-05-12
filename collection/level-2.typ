@@ -69,13 +69,14 @@
 	question:$integral (3x+2)/(x^2+2x+10)dif x$,
 	answer:[$
 		integral (3x+2)/(x^2+2x+10)dif x=3Int(#1,integral (x+1)/(x^2+2x+10)dif x)-Int(#2,integral (dif x)/(x^2+2x+10))
-	$分别解这两个积分，得到#multi-eq[$
+	$分别解这两个积分，得到#multi-eq($
 		Int(#1)=Int(#1,integral (x+1)/(x^2+2x+10) dif x)=&1/2integral (2x+2)/(x^2+2x+10) dif x\
 		=&1/2integral (dif(x^2+2x+10))/(x^2+2x+10)\
-		=&1/2log(x^2+2x+10)+C_1$$
+		=&1/2log(x^2+2x+10)+C_1
+	$,$
 		Int(#2),Int(#2,integral (dif x)/(x^2+2x+10))=&integral (dif(x+1))/((x+1)^2+9)\
 		=&1/3arctan (x+1)/3+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		3Int(#1)-Int(#2)=3/2log(x^2+2x+10)-1/3arctan (x+1)/3+C
 	$],
 )
@@ -463,14 +464,15 @@
 	question:$integral (dif x)/(2-sin x)$,
 	answer:[$
 		integral (dif x)/(2-sin x)=integral (2+sin x)/(4-sin^2x)dif x=2integral (dif x)/(4-sin^2x)+integral (sin x dif x)/(4-sin^2x)
-	$分别解这两个积分，得#multi-eq[$
+	$分别解这两个积分，得#multi-eq($
 		I_1=integral (dif x)/(4-sin^2x)=&integral (sec^2x dif x)/(4sec^2x-tan^2x)\
 		=&integral (dif tan x)/(4+3tan^2x)\
 		=&1/3integral (dif tan x)/(tan^2x+(2/sqrt(3))^2)\
-		=&1/(2sqrt(3))arctan (sqrt(3)tan x)/2+C_1$$
+		=&1/(2sqrt(3))arctan (sqrt(3)tan x)/2+C_1
+	$,$
 		I_2=integral (sin x dif x)/(4-sin^2x)=&-integral (dif cos x)/(3+cos^2x)\
 		=&-1/sqrt(3)arctan (cos x)/sqrt(3)+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		2I_1+I_2=1/sqrt(3)arctan (sqrt(3)tan x)/2-1/sqrt(3)arctan (cos x)/sqrt(3)+C
 	$],
 )
@@ -510,16 +512,17 @@
 	question:$integral (dif x)/(sin x+2cos x)$,
 	answer:[$
 		integral (dif x)/(sin x+2cos x)=integral (2cos x-sin x)/(4cos^2x-sin^2x)dif x=2Int(#1,integral (cos x dif x)/(4 cos^2x-sin^2x))-Int(#2,integral (sin x dif x)/(4cos^2x-sin^2x))
-	$分别解这两个积分，得#multi-eq[$
+	$分别解这两个积分，得#multi-eq($
 		Int(#1)=Int(#1,integral (cos x dif x)/(4cos^2x-sin^2x))=&integral (dif sin x)/(4-5sin^2x)\
 		=&integral (dif sin x)/((2-sqrt(5)sin x)(2+sqrt(5)sin x))\
 		=&1/4integral (dif sin x)/(2-sqrt(5)sin x)+1/4integral (dif sin x)/(2+sqrt(5)sin x)\
-		=&1/(4sqrt(5))log abs((2+sqrt(5)sin x)/(2-sqrt(5)sin x))+C_1$$
+		=&1/(4sqrt(5))log abs((2+sqrt(5)sin x)/(2-sqrt(5)sin x))+C_1
+	$,$
 		Int(#2)=Int(#2,integral (sin x dif x)/(4cos^2x-sin^2x))=&-integral (dif cos x)/(5 cos^2x-1)\
 		=&integral (dif cos x)/((1-sqrt(5)cos x)(1+sqrt(5)cos x))\
 		=&1/2integral (dif cos x)/(1-sqrt(5)cos x)+1/2integral (dif cos x)/(1+sqrt(5)cos x)\
 		=&1/(2sqrt(5))log abs((1+sqrt(5)cos x)/(1-sqrt(5)cos x))+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		2Int(#1)-Int(#2)=1/(2sqrt(5))log abs((2+sqrt(5)sin x)/(2-sqrt(5)sin x))-2/(2sqrt(5))log abs((1+sqrt(5)cos x)/(1-sqrt(5)cos x))+C
 	$],
 )

@@ -212,10 +212,11 @@
 	question:$integral (sqrt(1-x)-sqrt(1+x))/(sqrt(1-x^2))dif x$,
 	answer:[$
 		integral (sqrt(1-x)-sqrt(1+x))/(sqrt(1-x^2))dif x=Int(#1,integral sqrt(1-x)/sqrt(1-x^2)dif x)-Int(#2,integral sqrt(1+x)/sqrt(1-x^2)dif x)
-	$分别解这两个积分，得到#multi-eq[$
-		Int(#1)=Int(#1,integral sqrt(1-x)/sqrt(1-x^2)dif x)=integral (dif x)/sqrt(1+x)=integral (x+1)^(-1/2)dif(x+1)=2sqrt(1+x)+C_1$$
+	$分别解这两个积分，得到#multi-eq($
+		Int(#1)=Int(#1,integral sqrt(1-x)/sqrt(1-x^2)dif x)=integral (dif x)/sqrt(1+x)=integral (x+1)^(-1/2)dif(x+1)=2sqrt(1+x)+C_1
+	$,$
 		Int(#2)=Int(#2,integral sqrt(1+x)/sqrt(1-x^2)dif x)=integral (dif x)/sqrt(1-x)=-integral (1-x)^(-1/2)dif(1-x)=-2sqrt(1-x)+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		Int(#1)-Int(#2)=2sqrt(1+x)+2sqrt(1-x)+C
 	$]
 )
@@ -271,10 +272,11 @@
 	question:$integral sin x cos pi x dif x$,
 	answer:[$
 		integral sin x cos pi x dif x=1/2Int(#1,integral sin[(1+pi)x]dif x)+1/2Int(#2,integral sin[(1-pi)x]dif x)
-	$分别解这两个积分，得到#multi-eq[$
-		Int(#1)=Int(#1,integral sin[(1+pi)x]dif x)=1/(1+pi)integral sin[(1+pi)x]dif[(1+pi)x]=-cos[(1+pi)x]/(1+pi)+C_1$$
+	$分别解这两个积分，得到#multi-eq($
+		Int(#1)=Int(#1,integral sin[(1+pi)x]dif x)=1/(1+pi)integral sin[(1+pi)x]dif[(1+pi)x]=-cos[(1+pi)x]/(1+pi)+C_1
+	$,$
 		Int(#2)=Int(#2,integral sin[(1-pi)x]dif x)=1/(1-pi)integral sin[(1-pi)x]dif[(1-pi)x]=-cos[(1-pi)x]/(1-pi)+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		1/2Int(#1)+1/2Int(#2)=-cos[(1+pi)x]/(2+2pi)-cos[(1-pi)x]/(2-2pi)+C
 	$],
 )
@@ -288,10 +290,11 @@
 	answer:[$
 		integral cos x cos(x+a)dif x=&integral cos x (cos x cos a-sin x sin a)dif x\
 		=&cos a Int(#1,integral cos^2x dif x)-Int(#2,integral sin a cos x sin x dif x)
-	$分别解这两个积分，得到#multi-eq[$
-		Int(#1)=Int(#1,integral cos^2x dif x)=integral (1+cos 2x)/2 dif x=integral (dif x)/2+integral (cos 2x)/4dif(2x)=x/2+1/4sin 2x+C_1$$
+	$分别解这两个积分，得到#multi-eq($
+		Int(#1)=Int(#1,integral cos^2x dif x)=integral (1+cos 2x)/2 dif x=integral (dif x)/2+integral (cos 2x)/4dif(2x)=x/2+1/4sin 2x+C_1
+	$,$
 		Int(#2)=Int(#2,integral cos x sin x dif x)=integral sin x dif sin x=1/2sin^2 x+C_2
-	$]所以原积分可表示为$
+	$)所以原积分可表示为$
 		Int(#1)cos a-Int(#2)sin a=x/2cos a+1/4sin 2x cos a-1/2sin^2x sin a+C
 	$],
 )

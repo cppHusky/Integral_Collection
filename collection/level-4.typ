@@ -62,3 +62,23 @@
 	本题与#ref("sqrt(1-x^2)/(1+x)")相似，是根号移分母原则的体现。这里倘若将根号放分子上，就不能拼凑以简化被和函数；但是只要将根号移到分母，就可以通过拼凑分子的方式进行合理凑微分，从而打开局面。#parbreak()
 	另外，因为这里$u>0$，所以开平方不用带绝对值。
 ]
+#question(
+	tag:"1/(sqrt(x^2+x+1)-1)",
+	question:$integral (dif x)/(sqrt(x^2+x+1)-1)$,
+	answer:$
+		#let (u,v,w)=($sqrt(x^2+x+1)$,$sqrt(x^(-2)+x^(-1)+1)$,$sqrt((x+1)^(-2)-(x+1)^(-1)+1)$)
+		&integral (dif x)/(#u -1)\
+		=&integral #u/(x^2+x)dif x+integral (dif x)/(x^2+x)\
+		=&integral (x^2+x+1)/((x^2+x)#u)dif x+log abs(x/(x+1))\
+		=&integral (x^2+x-x)/((x^2+x)#u)dif x+integral (dif x)/(x#u)+log abs(x/(x+1))\
+		=&integral (dif x)/#u -integral (dif x)/((x+1)#u)-sgn x integral (dif x^(-1))/#v+log abs(x/(x+1))\
+		=&log(2x+1+2#u)-sgn(x+1)integral (dif x)/((x+1)^2#w)\
+		&--sgn x integral (dif x^(-1))/#v+log abs(x/(x+1))\
+		=&log(2x+1+2#u)\
+		&++log[2(x+1)^(-1)-1+2#w]sgn(x+1)\
+		&--log(2x^(-1)+1+2#v)sgn x+log abs(x/(x+1))+C
+	$
+)
+#comment[
+	这个问题比#ref("sqrt(e^2x+e^x+1)")要更进一步，需要考虑的因素包括分母有理化（一般使用平方差公式）、根号移分母和适当拼凑简化计算。这些不是靠书本知识传授就能快速掌握的，需要读者在做题过程中反复体会方可。
+]

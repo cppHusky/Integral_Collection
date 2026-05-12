@@ -18,6 +18,7 @@
 	question:[],
 	answer:[],
 )={
+	counter(math.equation).update(0)
 	parbreak()
 	question-id.step()
 	context text(fill:category,weight:"semibold")[
@@ -32,7 +33,10 @@
 }
 #let ref(id)=context link(
 	label(id),
-	text(fill:luma(128),font:"Noto Serif")[【Q#question-id.at(query(label(id)).first().location()).first()】]
+	text(
+		fill:luma(128),
+		font:"Noto Serif"
+	)[【Q#question-id.at(query(label(id)).first().location()).first()】]
 )
 #let comment(body)={
 	parbreak()
@@ -82,14 +86,28 @@
 		body
 	}
 }
-#let multi-eq(body)={
-	align(
-		center,
-		block({
-			show math.equation:set align(left)
-			show math.equation:set par(first-line-indent:0em)
-			body
-		})
-	)
+#let multi-eq(tag:none,..args)=context {
+	set math.equation(numbering:none)
+	let widths=args.pos().map(measure).map(w=>w.width)
+	let max-width=calc.max(..widths)
+	let initial-number=counter(math.equation).get().first()
+	show:align.with(center)
+	if tag==none{
+		args.pos().zip(widths).enumerate(start:1).map(((id,(it,width)))=>{
+			move(dx:(width - max-width)/2,[#it#label(tag+"-"+str(id))])
+		}).join(parbreak())
+	}
+	else{
+		args.pos().zip(widths).enumerate(start:1).map(((id,(it,width)))=>{
+			let number=numbering("(1)",initial-number+id)
+			counter(math.equation).step()
+			move(dx:(width - max-width)/2,[#it#label(tag+"-"+str(id))])
+			place(right,number,dy:-2.9em)
+		}).join(parbreak())
+	}
 }
+#let ref-eq(tag,id)=link(
+	label(tag+"-"+str(id)),
+	text[(#id)],
+)
 #let noindent=h(-2em)

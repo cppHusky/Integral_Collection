@@ -1,4 +1,4 @@
-#import "../utils.typ":question,comment,subst,ref,multi-eq,Int,noindent
+#import "../utils.typ":question,comment,subst,ref,multi-eq,ref-eq,Int,noindent
 #import "../math.typ":*
 #question(
 	tag:"1/(ax^2+bx+c)",
@@ -33,11 +33,13 @@
 	tag:"(2x+1)/((x-1)(x-2)(x+3))",
 	category:red,
 	question:$integral (2x+1)/((x-1)(x-2)(x+3))dif x$,
-	answer:[设$(2x+1)/((x-1)(x-2)(x-3))=A/(x-1)+B/(x-2)+C/(x+3)$，用留数法求出#multi-eq[$
-		A=lr((2x+1)/((x-2)(x+3))|)_(x-1=0)=-3/4$$
-		B=lr((2x+1)/((x-1)(x+3))|)_(x-2=0)=1$$
+	answer:[设$(2x+1)/((x-1)(x-2)(x-3))=A/(x-1)+B/(x-2)+C/(x+3)$，用留数法求出#multi-eq($
+		A=lr((2x+1)/((x-2)(x+3))|)_(x-1=0)=-3/4
+	$,$
+		B=lr((2x+1)/((x-1)(x+3))|)_(x-2=0)=1
+	$,$
 		C=lr((2x+1)/((x-1)(x-2))|)_(x+3=0)=-1/4
-	$]所以$
+	$)所以$
 		integral (2x+1)/((x-1)(x-2)(x+3))dif x=&-3/4integral (dif x)/(x-1)+integral (dif x)/(x-2)-1/4(dif x)/(x+3)\
 		=&-3/4log abs(x-1)+log abs(x-2)-1/4log abs(x+3)+C
 	$],
@@ -51,12 +53,15 @@
 	tag:"1/(x^2(x+1)^2)",
 	category:red,
 	question:$integral (dif x)/(x^2(x+1)^2)$,
-	answer:[设$1/(x^2(x+1)^2)=A/x^2+B/x+D/(x+1)^2+E/(x+1)$，用留数法求出#multi-eq[$
-		A=lr(1/(x+1)^2|)_(x=0)=1$$
-		B=lr((dif 1/(x+1)^2)/(dif x)|)_(x=0)=lr(-2/(x+1)|)_(x=0)=-2$$
-		D=lr(1/x^2|)_(x+1=0)=1$$
+	answer:[设$1/(x^2(x+1)^2)=A/x^2+B/x+D/(x+1)^2+E/(x+1)$，用留数法求出#multi-eq($
+		A=lr(1/(x+1)^2|)_(x=0)=1
+	$,$
+		B=lr((dif 1/(x+1)^2)/(dif x)|)_(x=0)=lr(-2/(x+1)|)_(x=0)=-2
+	$,$
+		D=lr(1/x^2|)_(x+1=0)=1
+	$,$
 		E=lr((dif 1/x^2)/(dif(x+1))|)_(x+1=0)=lr(-2/x^3|)_(x+1=0)=2
-	$]所以$
+	$)所以$
 		integral (dif x)/(x^2(x+1)^2)=&integral (dif x)/x^2-2integral (dif x)/x+integral (dif x)/(x+1)^2+2integral (dif x)/(x+1)\
 		=&-1/x-2log abs(x)-1/(x+1)+2log abs(x+1)+C
 	$],
@@ -70,12 +75,15 @@
 	question:$integral (dif x)/(x(x^5+1)^3)$,
 	answer:[$
 		integral (dif x)/(x(x^5+1)^3)=integral (x^4 dif x)/(x^5(x^5+1)^3)=1/5integral (dif x^5)/(x^5(x^5+1)^3)=1/5integral (dif u)/(u(u+1)^3) quad subst(u=x^5)
-	$设$1/(u(u+1)^3)=A/u+B/(u+1)^3+E/(u+1)^2+E/(u+1)$，用留数法求出#multi-eq[$
-		A=lr(1/(u+1)^3|)_(u=0)=1$$
-		B=lr(1/u|)_(u+1=0)=-1$$
-		C=lr(dif(1/u)/dif(u+1)|)_(u+1=0)=lr(-1/u^2|)_(u+1=0)=-1$$
+	$设$1/(u(u+1)^3)=A/u+B/(u+1)^3+E/(u+1)^2+E/(u+1)$，用留数法求出#multi-eq($
+		A=lr(1/(u+1)^3|)_(u=0)=1
+	$,$
+		B=lr(1/u|)_(u+1=0)=-1
+	$,$
+		C=lr(dif(1/u)/dif(u+1)|)_(u+1=0)=lr(-1/u^2|)_(u+1=0)=-1
+	$,$
 		D=lr(1/2dot (dif^2 1/u)/dif(u+1)^2|)_(u+1=0)=lr(1/u^3|)_(u+1=0)=-1
-	$]所以$
+	$)所以$
 		1/5integral (dif u)/(u(u+1)^3)=&1/5integral[1/u-1/(u+1)^3-1/(u+1)^2-1/(u+1)]dif u\
 		=&1/5integral (dif u)/u-1/5integral (dif u)/(u+1)-1/5integral (dif u)/(u+1)^2-1/5integral (dif u)/(u+1)^3\
 		=&1/5log abs(u/(u+1))+1/(5(u+1))+1/(10(u+1)^2)+C\
@@ -89,10 +97,11 @@
 	tag:"1/(x^3+1)",
 	category:blue,
 	question:$integral (dif x)/(x^3+1)$,
-	answer:[设$1/(x^3+1)=A/(x+1)+B/(x^2-x+1)$，用留数法求出#multi-eq[$
-		A=lr(1/(x^2-x+1)|)_(x+1=0)=1/3$$
+	answer:[设$1/(x^3+1)=A/(x+1)+B/(x^2-x+1)$，用留数法求出#multi-eq($
+		A=lr(1/(x^2-x+1)|)_(x+1=0)=1/3
+	$,$
 		B=lr(1/(x+1)|)_(x^2-x+1=0)=lr((x-2)/(x^2-x-2)|)_(x^2-x=-1)=(x-2)/(-3)
-	$]所以$
+	$)所以$
 		integral (dif x)/(x^3+1)=&1/3integral (dif x)/(x+1)-1/3integral (x-2)/(x^2-x+1)dif x\
 		=&1/3log abs(x+1)-1/6integral (2x-1)/(x^2-x+1)dif x+1/2integral (dif x)/(x^2-x+1)\
 		=&1/3log abs(x+1)-1/6log(x^2-x+1)+1/sqrt(3)arctan (2x-1)/sqrt(3)+C
@@ -106,13 +115,14 @@
 	tag:"1/(x^3-1)",
 	category:blue,
 	question:$integral (dif x)/(x^3-1)$,
-	answer:[设$1/(x^3-1)=A/(x-1)+B/(x^2+x-1)$，用模法求出#multi-eq[$
-		A=1/(x^2+x+1)mod(x-1)=1/3$$
+	answer:[设$1/(x^3-1)=A/(x-1)+B/(x^2+x-1)$，用模法求出#multi-eq($
+		A=1/(x^2+x+1)mod(x-1)=1/3
+	$,$
 		B=&1/(x-1)mod(x^2+x+1)\
 		=&(x+2)/(x^2+x-2)mod(x^2+x+1)\
 		=&(x+2)/(x^2+x+1-3)mod(x^2+x+1)\
 		=&(x+2)/(-3)
-	$]所以$
+	$)所以$
 		integral (dif x)/(x^3-1)=&1/3integral (dif x)/(x-1)-1/3integral (x+2)/(x^2+x+1)dif x\
 		=&1/3log abs(x-1)-1/6integral (2x+1)/(x^2+x+1)dif x-1/2integral (dif x)/(x^2+x+1)\
 	$],
@@ -127,16 +137,17 @@
 	question:$integral x^2/(x^4-x^2+1)dif x$,
 	answer:[考虑到$
 		x^4+x^2+1=(x^2+1)^2-x^2=(x^2-x+1)(x^2+x+1)
-	$设$x^2/(x^4+x^2+1)=A/(x^2-x+1)+B/(x^2+x+1)$，用模法求出#multi-eq[$
+	$设$x^2/(x^4+x^2+1)=A/(x^2-x+1)+B/(x^2+x+1)$，用模法求出#multi-eq($
 		A=&x^2/(x^2+x+1)mod(x^2-x+1)\
 		=&x^2/((x^2-x+1)+2x)mod(x^2-x+1)\
 		=&x^2/(2x)mod(x^2-x+1)\
-		=&x/2$$
+		=&x/2
+	$,$
 		B=&x^2/(x^2-x+1)mod(x^2+x+1)\
 		=&x^2/((x^2+x+1)-2x)mod(x^2+x+1)\
 		=&x^2/(-2x)mod(x^2+x+1)\
 		=&-x/2
-	$]所以$
+	$)所以$
 		&integral x^2/(x^4+x^2+1)dif x\
 		=&1/2integral x/(x^2-x+1)dif x-1/2integral x/(x^2+x+1)dif x\
 		=&1/4integral (2x-1)/(x^2-x+1)dif x+1/4integral (dif x)/(x^2-x+1)-1/4integral (2x+1)/(x^2+x+1)dif x+1/4integral (dif x)/(x^2+x+1)\
@@ -152,17 +163,18 @@
 	question:$integral (x-2)/(x^4+2x^3-3x^2-4x+4)dif x$,
 	answer:[考虑到$
 		x^4+2x^3-3x^2-4x+4=(x-1)^2(x+2)^2
-	$设$(x-2)/(x^4+2x^3-3x^2-4x+4)=A/(x-1)^2+B/(x+2)^2$，用模法求出#multi-eq[$
+	$设$(x-2)/(x^4+2x^3-3x^2-4x+4)=A/(x-1)^2+B/(x+2)^2$，用模法求出#multi-eq($
 		A=&(x-2)/(x+2)^2mod(x-1)^2\
 		=&(x-2)/(x^2-2x+1+6x+3)mod(x^2-2x+1)\
 		=&1/3dot ((x-2)(2x-5))/((2x+1)(2x-5))mod(x^2-2x+1)\
 		=&1/3dot (2x^2-4x+2-5x+8)/(4x^2-8x+4-9)mod(x^2-2x+1)\
-		=&(5x-8)/27$$
+		=&(5x-8)/27
+	$,$
 		B=&(x-2)/(x-1)^2mod(x+2)^2\
 		=&-1/3dot ((x-2)(2x+7))/((2x+1)(2x+7))mod(x^2+4x+4)\
 		=&-1/3dot (2x^2+8x+8-5x-22)/(4x^2+16x+16-9)mod(x^2+4x+4)\
 		=&-(5x+22)/27
-	$]所以$
+	$)所以$
 		&integral (x-2)/(x^4+2x^3-3x^2-4x+4)dif x\
 		=&1/27integral (5x-8)/(x-1)^2dif x-1/27integral (5x+22)/(x+2)^2dif x\
 		=&5/27integral (dif x)/(x-1)-1/9integral (dif x)/(x-1)^2-5/27integral (dif x)/(x+2)-4/9integral (dif x)/(x+2)^2\
@@ -179,14 +191,15 @@
 	question:$integral (3x^2+1)/(x^4+1)dif x$,
 	answer:[$
 		integral (3x^2+1)/(x^4+1)dif x=2Int(#1,integral (x^2+1)/(x^4+1)dif x)+Int(#2,integral (x^2-1)/(x^4+1)dif x)
-	$分别解这两个积分，得#multi-eq[$
+	$分别解这两个积分，得#multi-eq($
 		Int(#1)=Int(#1,integral (x^2+1)/(x^4+1)dif x)=&integral (1+x^(-2))/(x^2+x^(-2))dif x\
 		=&integral dif(x-x^(-1))/((x-x^(-1))^2+2)\
-		=&1/sqrt(2)arctan (x-x^(-1))/sqrt(2)+C_1$$
+		=&1/sqrt(2)arctan (x-x^(-1))/sqrt(2)+C_1
+	$,$
 		Int(#2)=Int(#2,integral (x^2-1)/(x^4+1)dif x)=&integral (1-x^(-2))/(x^2+x^(-2))dif x\
 		=&integral dif(x+x^(-1))/((x+x^(-1))^2-2)\
 		=&1/(2sqrt(2))log abs((x+x^(-1)-sqrt(2))/(x+x^(-1)+sqrt(2)))+C_2
-	$]所以原积分可化为$
+	$)所以原积分可化为$
 		2Int(#1)+Int(#2)=sqrt(2)arctan (x-x^(-1))/sqrt(2)+1/(2sqrt(2))log abs((x+x^(-1)-sqrt(2))/(x+x^(-1)+sqrt(2)))+C
 	$],
 )
@@ -282,10 +295,11 @@
 		integral (dif x)/root(3,x^3+1)=1/3integral (x^2dif x)/(x^2root(3,x^3+1))=1/3integral (dif x^3)/(x^2root(3,x^3+1))
 	$令$subst(t=root(3,(x^3+1)/x^3))$，则$x^3=1/(t^3-1)$，所以$
 		1/3integral (dif x^3)/(x^2root(3,x^3+1))=1/3integral (dif 1/(t^3-1))/(root(3,(1/(t^3-1))^2dot t^3/(t^3-1)))=1/3integral (dif 1/(t^3-1))/(t/(t^3-1))=Int(integral (-t dif t)/(t^3-1))
-	$设$(-t)/(t^3-1)=A/(t-1)+B/(t^2+t+1)$，用留数法求出#multi-eq[$
-		A=&lr((-t)/(t^2+t+1)|)_(t-1=0)=-1/3$$
+	$设$(-t)/(t^3-1)=A/(t-1)+B/(t^2+t+1)$，用留数法求出#multi-eq($
+		A=&lr((-t)/(t^2+t+1)|)_(t-1=0)=-1/3
+	$,$
 		B=&lr((-t)/(t-1)|)_(t^2+t+1=0)=lr(-t(t+2)/(t^2+t-2)|)_(t^2+t+1=0)=(t-1)/3
-	$]所以$
+	$)所以$
 		&Int(integral (-t dif t)/(t^3-1))\
 		=&-1/3integral (dif t)/(t-1)+1/3integral (t-1)/(t^2+t+1)dif t\
 		=&-1/3log abs(t-1)+1/6integral (2t+1)/(t^2+t+1)dif t-1/2integral (dif t)/(t^2+t+1)\
@@ -416,11 +430,13 @@
 )
 #comment[
 	本题体现了含$sqrt(a x^2+b x+c)quad(a!=0)$类型积分中的一个重要原则：若被积函数的根号位于分子，则将其放到分母。因为根式与多项式不同，放在分子上也无法分项，没有拼凑的可能；但如果把根号放在分母，就可以根据分母的情况来适当拼凑分子。#parbreak()
-	此外，很多常用函数的导数都是根号在分母的形式，比如#multi-eq[$
-		(dif arcsin x)/(dif x)=1/sqrt(1-x^2),$$
-		(dif log abs(x+sqrt(x^2+-1)))/(dif x)=1/sqrt(x^2+-1),$$
+	此外，很多常用函数的导数都是根号在分母的形式，比如#multi-eq($
+		(dif arcsin x)/(dif x)=1/sqrt(1-x^2),
+	$,$
+		(dif log abs(x+sqrt(x^2+-1)))/(dif x)=1/sqrt(x^2+-1),
+	$,$
 		(dif sqrt(x^2+1))/(dif x)=x/(x^2+-1).
-	$]
+	$)
 	#noindent 所以如果根号是在分母上，那么凑相应的求导公式就会更简单，比如#ref("sqrt(e^2x+e^x+1)")。
 ]
 #question(
@@ -455,16 +471,27 @@
 	这两题都用到了分部积分法，且思路一致，都把原积分化成了两个待解问题：一个是原积分本身，另一个是$integral (dif x)/sqrt(x^2+1)$（它的解法见#ref("1/sqrt(x^2+1)")）。这样一来只要通过移项，就可以把原积分用其它已知结论表达出来。
 ]
 #question(
-	tag:"sin^5x",
-	category:blue,
-	question:$integral sin^5x dif x$,
-	answer:$
-		integral sin^5x dif x=&integral (1/(2ii)ee^(ii x)-1/(2ii)ee^(-ii x))^5 dif x\
-		=&1/(32ii)integral[(ee^(5ii x)-ee^(-5ii x))-5(ee^(3ii x)-ee^(-3ii x))+10(ee^(ii x)-ee^(-ii x))]dif x\
-		=&1/16integral sin 5x dif x-5/16integral sin 3x dif x+5/8integral sin x dif x\
-		=&-1/80 cos 5x+5/48 cos 3x-5/8 cos x+C
-	$,
+	tag:"1/(x(1+sqrt(1-x^2)))",
+	category:red,
+	question:$integral (dif x)/(x(1+sqrt(1-x^2)))$,
+	answer:[$
+		integral (dif x)/(x(1+sqrt(1-x^2)))=&integral (1-sqrt(1-x^2))/x^3dif x\
+		=&1/2integral (sqrt(1-x^2)-1)dif 1/x^2\
+		=&(sqrt(1-x^2)-1)/(2x^2)-1/2integral (dif sqrt(1-x^2))/x^2\
+		=&(sqrt(1-x^2)-1)/(2x^2)+1/2Int(integral (dif x)/(x sqrt(1-x^2)))
+	$接下来解$Int(integral (dif x)/(x sqrt(1-x^2)))$：$
+		Int(integral (dif x)/(x sqrt(1-x^2)))=&integral (dif x)/(x^2sqrt(x^(-2)+1)sgn x)\
+		=&-sgn x integral (dif x^(-1))/sqrt(x^(-2)-1)\
+		=&-sgn x log abs(x^(-1)+sqrt(x^(-2)-1))+C_1\
+		=&log (1-sqrt(1-x^2))/abs(x)+C_1
+	$所以$
+		integral (dif x)/(x(1+sqrt(x^2+1)))=(sqrt(1-x^2)-1)/(2x^2)+1/2log (1-sqrt(1-x^2))/abs(x)+C
+	$],
 )
+#comment[
+	善用平方差公式能简化很多问题，比如说#ref("1/(sqrt2+sqrt(1-x)+sqrt(1+x))")#ref("1/(sqrt(x^2+x+1)-1)")。#parbreak()
+	另外，本题还有一种算法，就是分子分母同乘$x$，凑微分换元$u=x^2$将这个积分化为$1/2integral (dif x^2)/(x^2(1+sqrt(x^2+1)))$。做法不尽相同，还应就题论题决定最佳方案。
+]
 #question(
 	tag:"1/(sinx+2cosx)~~~",
 	category:blue,
@@ -477,4 +504,80 @@
 )
 #comment[
 	这种方法比较特别，是通过构造凑微分$dif(2sin x-cos x)$的形式来解决问题的。这里也体现了整体凑微分的思想，不是分项而是直接把$sin x+2cos x$作为整体凑入微分项中。
+]
+#question(
+	tag:"sinx/(asinx+bcosx)",
+	category:blue,
+	question:$integral (sin x)/(a sin x+b cos x)dif x space(a,b!=0)$,
+	answer:[令$Int(#1)=Int(#1,integral (sin x dif x)/(a sin x+b cos x)),Int(#2)=Int(#2,integral (cos x dif x)/(a sin x+b cos x))$，并分别求出#multi-eq(tag:"sinx/(asinx+bcosx)",$
+			a Int(#1)+b Int(#2)=&integral (a sin x+b cos x)/(a sin x+b cos x)dif x=integral dif x=x+C_1
+		$,$
+			a Int(#2)-b Int(#1)=&integral (a cos x-b sin x)/(a sin x+b cos x)dif x=integral dif(a sin x+b cos x)/(a sin x+b cos x)=log abs(a sin x+b cos x)+C_2
+	$)联立#ref-eq("sinx/(asinx+bcosx)",1)#ref-eq("sinx/(asinx+bcosx)",2)，解得$
+		Int(#1)=(a x-b log abs(a sin x+b cos x))/(a^2+b^2+)+C
+	$],
+)
+#comment[
+	这是组合积分法最经典的例题。组合积分法的关键在于寻找合适的参元（比如本例的$Int(#1),Int(#2)$），通过建立参元之间的线性方程组来解出各个参元，利用这些参元拼出所要求的原函数。#parbreak()
+	在本题中，$Int(#1)$就是所要求出的结果，那么就不必再求$Int(#2)$了，直接使用消元法解方程组即可。但倘若要求$integral (c sin x+d cos x)/(a sin x+b cos x)dif x$，就需要在求出$Int(#1),Int(#2)$之后，再用$c Int(#1)+d Int(#2)$将其表示出来。
+]
+#question(
+	tag:"cos^2x/(asinx+bcosx)",
+	category:blue,
+	question:$integral (cos^2x)/(a sin x+b cos x)dif x space(a,b!=0)$,
+	answer:[令$Int(#1)=Int(#1,integral (cos^2x)/(a sin x+b cos x)dif x),Int(#2)=Int(#2,integral (sin^2x)/(a sin x+b cos x)dif x)$，并分别求出#multi-eq(tag:"cos^2x/(asinx+bcosx)",$
+		b^2Int(#1)-a^2Int(#2)=&integral (b^2cos^2x-a^2sin^2x)/(a sin x+b cos x)dif x\
+		=&integral (b cos x-a sin x)dif x\
+		=&b sin x+a cos x+C_1
+	$,$
+		Int(#1)+Int(#2)=&integral 1/(a sin x+b cos x)dif x\
+		=&integral (a sin x+b cos x)/(a sin x+b cos x)^2dif x\
+		=&integral dif(b sin x-a cos x)/(a^2+b^2-(b sin x-a cos x)^2)\
+		=&1/(2sqrt(a^2+b^2))log abs((b sin x-a cos x+sqrt(a^2+b^2))/(b sin x-a cos x-sqrt(a^2+b^2)))+C_2
+	$)联立#ref-eq("cos^2x/(asinx+bcosx)",1)#ref-eq("cos^2x/(asinx+bcosx)",2)，解得$
+		Int(#1)=(b sin x+a cos x)/(a^2+b^2)+a^2/(2sqrt(a^2+b^2)^3)log abs((b sin x-a cos x+sqrt(a^2+b^2))/(b sin x-a cos x-sqrt(a^2+b^2)))+C
+	$],
+)
+#question(
+	tag:"sin^5x",
+	category:blue,
+	question:$integral sin^5x dif x$,
+	answer:$
+		integral sin^5x dif x=&integral (1/(2ii)ee^(ii x)-1/(2ii)ee^(-ii x))^5 dif x\
+		=&1/(32ii)integral[(ee^(5ii x)-ee^(-5ii x))-5(ee^(3ii x)-ee^(-3ii x))+10(ee^(ii x)-ee^(-ii x))]dif x\
+		=&1/16integral sin 5x dif x-5/16integral sin 3x dif x+5/8integral sin x dif x\
+		=&-1/80 cos 5x+5/48 cos 3x-5/8 cos x+C
+	$,
+)
+#question(
+	tag:"1/(sqrt2+sqrt(1-x)+sqrt(1+x))",
+	category:red,
+	question:$integral (dif x)/(sqrt(2)+sqrt(1-x)+sqrt(1+x))$,
+	answer:$
+		#let (u,v,uv)=($sqrt(1-x)$,$sqrt(1+x)$,$sqrt(1-x^2)$)
+		integral (dif x)/(sqrt(2)+#u+#v)=&integral (#u+#v -sqrt(2))/((#u+#v)^2-2)dif x\
+		=&integral (#u+#v -sqrt(2))/(2#uv)dif x\
+		=&1/2integral (dif x)/#v+1/2integral (dif x)/#u -1/sqrt(2)integral (dif x)/#uv\
+		=&#v -#u -1/sqrt(2)arcsin x+C
+	$,
+)
+#comment[
+	本题用平方差公式的一个巧妙之处在于，分母在套用平方差公式后变成了单项式，故分项和约分都很容易。当然，这需要分母系数比较凑巧，倘若$sqrt(2)$换成其它的常数，就未必能如此简便。
+]
+#question(
+	tag:"1/(sqrt2+sqrt(1-x)+sqrt(1+x))~",
+	category:red,
+	question:$integral (dif x)/(sqrt(2)+sqrt(1-x)+sqrt(1+x))$,
+	answer:[令$subst(x=sin 2t,t in[-pi/4,pi/4))$，则$
+		integral (dif x)/(sqrt(2)+sqrt(1-x)+sqrt(1+x))=&integral (dif sin 2t)/(sqrt(2)+sqrt(1-sin 2t)+sqrt(1+sin 2t))\
+		=&integral (2cos 2t dif t)/(sqrt(2)+cos t-sin t+cos t+sin t)\
+		=&integral (2cos 2t dif t)/(sqrt(2)+2cos t)\
+		=&integral (2cos 2t(sqrt(2)-2cos t))/(2(1-2cos^2t))dif t\
+		=&integral (2cos t-sqrt(2))dif t\
+		=&2sin t-sqrt(2)t+C\
+		=&2sin (arcsin x)/2-1/sqrt(2)arcsin x+C
+	$],
+)
+#comment[
+	本题也可以用三角换元来消根号。注意，开根式$sqrt(1-sin 2t)=cos t-sin t,sqrt(1+sin 2t)=cos t+sin t$是建立在前提$t in[-pi/4,pi/4]$之上的，否则结论就是有问题的。
 ]

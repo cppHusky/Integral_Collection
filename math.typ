@@ -8,6 +8,7 @@
 #let artanh=$op("artanh")$
 #let mod=math.class("binary",math.mod)
 #let cases(..args)=math.cases(
+	gap:.6em,
 	..args.named(),
 	..args.pos().map(it=>{
 		if it.has("children"){

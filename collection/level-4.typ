@@ -115,7 +115,7 @@
 	$,$
 		Int(#1)-Int(#2)=&integral ((sin x-cos x)(1+sin x cos x))/((sin x+cos x)(1-sin x cos x))dif x\
 		=&integral ((sin^2x-cos^2x)(2+sin 2x))/((sin x+cos x)^2(2-sin 2x))dif x\
-		=&1/2integral ((2+sin 2x)cos 2x)/((1+sin 2x)(sin 2x-2)) dif 2x
+		=&1/2integral ((2+sin 2x)cos 2x)/((1+sin 2x)(sin 2x-2)) dif 2x\
 		=&1/2integral (u+2)/((u+1)(u-2))dif u quad subst(u=sin 2x)\
 		=&2/3log(2-sin 2x)-1/6log(1+sin 2x)+C_2
 	$)联立#ref-eq("sin^3x/(sin^3x+cos^3x)",1)#ref-eq("sin^3x/(sin^3x+cos^3x)",2)解得$

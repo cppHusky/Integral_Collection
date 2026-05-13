@@ -10,14 +10,19 @@
 #let cases(..args)=math.cases(
 	..args.named(),
 	..args.pos().map(it=>{
-		let arr=()
-		for elem in it.children{
-			if repr(elem)=="align-point()"{
-				arr.push(math.display(sym.space))
+		if it.has("children"){
+			let arr=()
+			for elem in it.children{
+				if repr(elem)=="align-point()"{
+					arr.push(math.display(sym.space))
+				}
+				arr.push(math.display(elem))
 			}
-			arr.push(math.display(elem))
+			arr.join()
 		}
-		arr.join()
+		else{
+			math.display(it)
+		}
 	}),
 )
 #let math-shorthands(body)={

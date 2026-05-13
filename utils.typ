@@ -17,20 +17,33 @@
 	category:black,//red,blue,black
 	question:[],
 	answer:[],
-)={
+)=block(width:100%,context{
+	parbreak()
 	counter(math.equation).update(0)
-	parbreak()
 	question-id.step()
-	context text(fill:category,weight:"semibold")[
-		【Q#question-id.display()】
-		#label(tag)
-	]
-	question
+	block(width:100%,{
+		place(
+			right,
+			dx:-156.5mm,
+			dy:.6em,
+			context text(fill:category,weight:"semibold")[
+				【Q#question-id.display()】
+				#label(tag)
+			],
+		)
+		question
+	})
 	parbreak()
-	text(fill:category,weight:"bold")[【解】]
-	answer
+	block(width:100%,{
+		place(
+			right,
+			dx:-156.5mm,
+			text(fill:category,weight:"bold")[【解】]
+		)
+		answer
+	})
 	parbreak()
-}
+})
 #let ref(id)=context underline(link(
 	label(id),
 	text(

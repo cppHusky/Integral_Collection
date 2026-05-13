@@ -86,28 +86,40 @@
 		body
 	}
 }
-#let multi-eq(tag:none,..args)=context {
+#let multi-eq(tag:none,..args)=block(width:100%,context{
 	set math.equation(numbering:none)
 	let widths=args.pos().map(measure).map(w=>w.width)
 	let max-width=calc.max(..widths)
 	let initial-number=counter(math.equation).get().first()
 	show:align.with(center)
 	if tag==none{
-		args.pos().zip(widths).enumerate(start:1).map(((id,(it,width)))=>{
-			move(dx:(width - max-width)/2,[#it#label(tag+"-"+str(id))])
-		}).join(parbreak())
+		args.pos().zip(widths).map(((it,width))=>{
+			move(
+				dx:(width - max-width)/2,
+				it,
+			)
+		}).join()
 	}
 	else{
-		args.pos().zip(widths).enumerate(start:1).map(((id,(it,width)))=>{
-			let number=numbering("(1)",initial-number+id)
+		args.pos().zip(widths).enumerate(start:1).map(((i,(it,width)))=>{
+			let number=numbering("(1)",initial-number+i)
 			counter(math.equation).step()
-			move(dx:(width - max-width)/2,[#it#label(tag+"-"+str(id))])
-			place(right,number,dy:-2.9em)
-		}).join(parbreak())
+			block(width:100%,{
+				move(
+					dx:(width - max-width)/2,
+					[#it#label(tag+"-"+str(i))],
+				)
+				place(
+					right,
+					dy:-1.5em,
+					number,
+				)
+			})
+		}).join()
 	}
-}
-#let ref-eq(tag,id)=link(
-	label(tag+"-"+str(id)),
-	text[(#id)],
+})
+#let ref-eq(tag,i)=link(
+	label(tag+"-"+str(i)),
+	[(#i)],
 )
 #let noindent=h(-2em)

@@ -1,3 +1,4 @@
+#let math-state-counter=counter("math-state")
 #let preset(body)={
 	import "@preview/itemize:0.2.0"
 	set page(
@@ -48,6 +49,20 @@
 		ghost;it;ghost
 	}
 	show math.equation:set block(breakable:true)
+	show math.equation.where(block:true):it=>block({
+		math-state-counter.step()
+		let pagenum=state(str(math-state-counter.get().first()))
+		context if here().page()!=pagenum.final(){
+			set text(fill:silver,size:16pt)
+			place(
+				center+bottom,
+				dy:10mm,
+				sym.arrow.b.filled,
+			)
+		}
+		it
+		context pagenum.update(here().page())
+	})
 	show heading.where(level:1):it=>{
 		set text(
 			size:30pt,

@@ -17,6 +17,62 @@
 	这是一个分母为二次根式的积分通式，更简洁的版本见@通题通解。如果读者可以记忆，将有助于加快解题速度。这种情形非常常见，并且容易推导通式，所以之后的题目中不再给出解决这个问题的具体过程。
 ]
 #question(
+	tag:"1/(x^3+x^2+x+1)^2",
+	question:$integral (dif x)/(x^3+x^2+x+1)^2$,
+	answer:[设$1/(x^3+x^2+x+1)^2=A/(x+1)^2+B/(x+1)+D/(x^2+1)^2+E/(x^2+1)$，用留数法求出#multi-eq($
+		A=lr(1/(x^2+1)^2|)_(x+1=0)=1/4
+	$,$
+		B=lr((dif 1/(x^2+1)^2)/dif(x+1)|)_(x+1=0)=lr(-(4x)/(x^2+1)^3|)_(x+1=0)=1/2
+	$,$
+		D=lr(1/(x+1)^2|)_(x^2+1=0)=-x/2
+	$,$
+		E=lr(dif[1/(x+1)^2-D]/dif(x^2+1)|)_(x^2+1=0)=lr((1/2-2/(x+1)^3)/(2x)|)_(x^2+1=0)=(1-2x)/4
+	$)所以$
+		integral (dif x)/((x+1)^2(x^2+1)^2)=&1/4integral (dif x)/(x+1)^2+1/2integral (dif x)/(x+1)-1/2integral (x dif x)/(x^2+1)^2+1/4integral (1-2x)/(x^2+1)dif x\
+		=&-1/(4(x+1))+1/2log abs(x+1)+1/(4(x^2+1))+1/4arctan x-1/4log(x^2+1)+C
+	$],
+)
+#comment[
+	这是留数法在解决分母含二次因式的有理函数裂项时的应用。这里解决$(dif f(x))/dif(x^2+1)$的方法是作微分变换化为$(dif f(x))/(dif x)dot (dif x)/dif(x^2+1)$，于是乎只需要分别求二者对$x$的导数即可，等于$(f'(x))/(2x)$。#parbreak()
+	还需要注意，这里求解$E$时分子的求导对象是$1/(x+1)^2-D$。如果本题是二次因式需要设解$F$，应该表示成$lr(1/2!dot (dif^2[1/(x+1)^2-D-E(x^2+1)])/dif(x^2+1)^2|)_(x^2+1=0)$。
+]
+#question(
+	tag:"(2x+1)/((x-1)^2(x^2+x+1)^2)",
+	question:$integral (2x+1)/((x-1)^2(x^2+x+1)^2)dif x$,
+	answer:[设$(2x+1)/((x-1)^2(x^2+x+1)^2)=A/(x-1)^2+B/(x^2+x+1)^2$，用模法求出#multi-eq($
+		A=&(2x+1)/(x^2+x+1)^2mod(x^2-2x+1)\
+		=&(2x+1)/(9x^2)mod(x^2-2x+1)\
+		=&(2x-x^2+2x)/(9x^2)mod (x^2-2x+1)\
+		=&(-x+4)/(9x)mod(x^2-2x+1)\
+		=&(-x-4x^2+8x)/(9x)mod(x^2-2x+1)\
+		=&(-4x+7)/9
+	$,$
+		B=&(2x+1)/(x-1)^2mod(x^2+x+1)^2\
+		=&((2x+1)(x^2+x+1+3x))/((x^2+x+1)^2-9x^2)mod(x^2+x+1)^2\
+		=&(2x^3+9x^2+6x+1)/(-9x^2)mod(x^4+2x^3+3x^2+2x+1)\
+		=&(2x^3+9x^2+6x-x^4-2x^3-3x^2-2x)/(-9x^2)mod(x^4+2x^3+3x^2+2x+1)\
+		=&(-x^3+6x+4)/(-9x)mod(x^4+2x^3+3x^2+2x+1)\
+		=&(-x^3+6x-4x^4-8x^3-12x^2-8x)/(-9x)mod(x^4+2x^3+3x^2+2x+1)\
+		=&(4x^3+9x^2+12x+2)/9
+	$)所以$
+		integral (2x+1)/((x-1)^2(x^2+x+1)^2)dif x=&-1/9integral (4x-7)/(x-1)^2dif x+1/9integral (4x^3+9x^2+12x+2)/(x^2+x+1)^2dif x\
+		=&-4/9integral (dif x)/(x-1)+1/3integral (dif x)/(x-1)^2+2/9integral (2x+1)/(x^2+x+1)dif x\
+		&++1/3integral (dif x)/(x^2+x+1)+1/6integral (2x+1)/(x^2+x+1)^2dif x-1/2integral (dif x)/(x^2+x+1)^2\
+		=&-4/9log abs(x-1)-1/(3(x-1))+2/9log(x^2+x+1)\
+		&++2/(3sqrt(3))arctan (2x+1)/sqrt(3)-1/(6(x^2+x+1))-1/2Int(integral (dif x)/(x^2+x+1)^2)
+	$接下来解$
+		Int(integral (dif x)/(x^2+x+1)^2)=integral dif(x+1/2)/[(x+1/2)^2+3/4]^2=&8integral (dif u)/(u^2+3)^2 quad subst(u=2x+1)\
+		=&8/3integral (dif u)/(u^2+3)+4/3integral u dif 1/(u^2+3)\
+		=&(4u)/(3(u^2+3))+4/(3sqrt(3))arctan u/sqrt(3)+C_1
+	$所以$
+		integral (2x+1)/((x-1)^2(x^2+x+1)^2)dif x=&-4/9log abs(x-1)-1/(3(x-1))\
+		&++2/9log(x^2+x+1)-(x+1)/(3(x^2+x+1))+C
+	$],
+)
+#comment[
+	这是模法在解决分母含二次重因式的有理函数裂项时的应用。这里解决$A,B$的思路可以分为两步：第一步是将分母变为单项式；第二步是在分子上换掉常数，来实现分子分母约分。#parbreak()
+]
+#question(
 	tag:"1/(ax^n+b)^((n+1)/n)",
 	question:$integral (dif x)/(a x^n+b)^((n+1)/n)space(a,b!=0,n in NN_+)$,
 	answer:$

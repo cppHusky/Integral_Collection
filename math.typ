@@ -29,6 +29,7 @@
 #let math-shorthands(body)={
 	show:shorthands.with(
 		($+-$,$plus.minus$),
+		($-+$,$minus.plus$),
 		($++$,$class("binary",+)$),
 		($--$,$class("binary",-)$),
 		($<-$,$< -$),

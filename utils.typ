@@ -22,24 +22,15 @@
 	counter(math.equation).update(0)
 	question-id.step()
 	block(width:100%,{
-		place(
-			right,
-			dx:-156.5mm,
-			dy:.6em,
-			context text(fill:category,weight:"semibold")[
-				【Q#question-id.display()】
-				#label(tag)
-			],
-		)
+		context text(fill:category,weight:"semibold")[
+			【Q#question-id.display()】
+			#label(tag)
+		]
 		question
 	})
 	parbreak()
 	block(width:100%,{
-		place(
-			right,
-			dx:-156.5mm,
-			text(fill:category,weight:"bold")[【解】]
-		)
+		text(fill:category,weight:"bold")[【解】]
 		answer
 	})
 	parbreak()

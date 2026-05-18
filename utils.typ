@@ -1,4 +1,5 @@
 #let question-id=counter("question")
+#let multi-eq-counter=counter("multi-eq")
 #show ref: it=>{
 	let target=query(it.target).first()
 	if type(target)!=content or target.func()!=metadata or target.value!="question" {
@@ -90,28 +91,24 @@
 		body
 	}
 }
-#let multi-eq(tag:none,..args)=block(width:100%,context{
+#let multi-eq(with-number:false,..args)=block(width:100%,context{
+	multi-eq-counter.step()
 	set math.equation(numbering:none)
 	let widths=args.pos().map(measure).map(w=>w.width)
 	let max-width=calc.max(..widths)
 	let initial-number=counter(math.equation).get().first()
 	show:align.with(center)
-	if tag==none{
-		args.pos().zip(widths).map(((it,width))=>{
-			move(
-				dx:(width - max-width)/2,
-				it,
-			)
-		}).join()
-	}
-	else{
+	if with-number{
 		args.pos().zip(widths).enumerate(start:1).map(((i,(it,width)))=>{
 			let number=numbering("(1)",initial-number+i)
 			counter(math.equation).step()
 			block(width:100%,{
 				move(
 					dx:(width - max-width)/2,
-					[#it#label(tag+"-"+str(i))],
+					context[
+						#it
+						#label("multi-eq-"+str(multi-eq-counter.get().first())+"-"+str(i))
+					],
 				)
 				place(
 					right,
@@ -121,9 +118,17 @@
 			})
 		}).join()
 	}
+	else{
+		args.pos().zip(widths).map(((it,width))=>{
+			move(
+				dx:(width - max-width)/2,
+				it,
+			)
+		}).join()
+	}
 })
-#let ref-eq(tag,i)=link(
-	label(tag+"-"+str(i)),
+#let ref-eq(i)=context link(
+	label("multi-eq-"+str(multi-eq-counter.get().first())+"-"+str(i)),
 	[(#i)],
 )
 #let noindent=h(-2em)

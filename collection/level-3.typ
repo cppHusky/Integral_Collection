@@ -509,11 +509,11 @@
 	tag:"sinx/(asinx+bcosx)",
 	category:blue,
 	question:$integral (sin x)/(a sin x+b cos x)dif x space(a,b!=0)$,
-	answer:[令$Int(#1)=Int(#1,integral (sin x dif x)/(a sin x+b cos x)),Int(#2)=Int(#2,integral (cos x dif x)/(a sin x+b cos x))$，并分别求出#multi-eq(tag:"sinx/(asinx+bcosx)",$
+	answer:[令$Int(#1)=Int(#1,integral (sin x dif x)/(a sin x+b cos x)),Int(#2)=Int(#2,integral (cos x dif x)/(a sin x+b cos x))$，并分别求出#multi-eq(with-number:true,$
 			a Int(#1)+b Int(#2)=&integral (a sin x+b cos x)/(a sin x+b cos x)dif x=integral dif x=x+C_1
 		$,$
 			a Int(#2)-b Int(#1)=&integral (a cos x-b sin x)/(a sin x+b cos x)dif x=integral dif(a sin x+b cos x)/(a sin x+b cos x)=log abs(a sin x+b cos x)+C_2
-	$)联立#ref-eq("sinx/(asinx+bcosx)",1)#ref-eq("sinx/(asinx+bcosx)",2)，解得$
+	$)联立#ref-eq(1)#ref-eq(2)，解得$
 		Int(#1)=(a x-b log abs(a sin x+b cos x))/(a^2+b^2+)+C
 	$],
 )
@@ -525,7 +525,7 @@
 	tag:"cos^2x/(asinx+bcosx)",
 	category:blue,
 	question:$integral (cos^2x)/(a sin x+b cos x)dif x space(a,b!=0)$,
-	answer:[令$Int(#1)=Int(#1,integral (cos^2x)/(a sin x+b cos x)dif x),Int(#2)=Int(#2,integral (sin^2x)/(a sin x+b cos x)dif x)$，并分别求出#multi-eq(tag:"cos^2x/(asinx+bcosx)",$
+	answer:[令$Int(#1)=Int(#1,integral (cos^2x)/(a sin x+b cos x)dif x),Int(#2)=Int(#2,integral (sin^2x)/(a sin x+b cos x)dif x)$，并分别求出#multi-eq(with-number:true,$
 		b^2Int(#1)-a^2Int(#2)=&integral (b^2cos^2x-a^2sin^2x)/(a sin x+b cos x)dif x\
 		=&integral (b cos x-a sin x)dif x\
 		=&b sin x+a cos x+C_1
@@ -534,7 +534,7 @@
 		=&integral (a sin x+b cos x)/(a sin x+b cos x)^2dif x\
 		=&integral dif(b sin x-a cos x)/(a^2+b^2-(b sin x-a cos x)^2)\
 		=&1/(2sqrt(a^2+b^2))log abs((b sin x-a cos x+sqrt(a^2+b^2))/(b sin x-a cos x-sqrt(a^2+b^2)))+C_2
-	$)联立#ref-eq("cos^2x/(asinx+bcosx)",1)#ref-eq("cos^2x/(asinx+bcosx)",2)，解得$
+	$)联立#ref-eq(1)#ref-eq(2)，解得$
 		Int(#1)=(b sin x+a cos x)/(a^2+b^2)+a^2/(2sqrt(a^2+b^2)^3)log abs((b sin x-a cos x+sqrt(a^2+b^2))/(b sin x-a cos x-sqrt(a^2+b^2)))+C
 	$],
 )

@@ -559,7 +559,142 @@
 #comment[
 	这是莫比乌斯换元（可以认为是分式线性替换的一种别名）的做法，本题是其中最简单的一种形式，即配成$(a x+b)/(b x-a)$的形状。这里的$a x+b$正是被积函数中出现的一次多项式。#parbreak()
 	这对多项式$a x+b$和$b x-a$的特点是平方和不含一次项：$(a x+b)^2+(b x-a)^2=(a^2+b^2)(x^2+1)$。这种形式可以用于隐藏部分项（如#ref("1/(1-x^2)root(4,x+x^3)")），使问题看起来扑朔迷离，因此是相当有难度的。#parbreak()
-	另外，这里还涉及了一个操作$sgn(x+2)(2x-1)/(x+2)=(2x-1)/abs(x+2)$，这是为了提前去掉系数中的符号函数，方便后续对被积函数的形式进行化简。在#ref("1/(1-x^2)root(4,x+x^3)")中也涉及到了这一步。
+	另外，这里还涉及了一个操作$sgn(x+2)(2x-1)/(x+2)=(2x-1)/abs(x+2)$，这是为了提前去掉系数中的符号函数，方便后续对被积函数的形式进行化简。#ref("1/(1-x^2)root(4,x+x^3)")也涉及到了这一步。
+]
+#question(
+	tag:"xlog(x+1)log(x-1)",
+	question:$integral x log(x+1)log(x-1)dif x$,
+	answer:$
+		&integral x log(x+1)log(x-1)dif x\
+		=&1/2integral log(x+1)log(x-1)dif(x^2-1)\
+		=&1/2(x^2-1)log(x+1)log(x-1)-1/2integral (x+1)log(x+1)dif x-1/2integral (x-1)log(x-1)dif x\
+		=&1/2(x^2-1)log(x+1)log(x-1)-1/4integral log(x+1)dif(x+1)^2-1/4integral log(x-1)dif(x-1)^2\
+		=&1/2(x^2-1)log(x+1)log(x-1)-1/4(x+1)^2log(x+1)-1/4(x-1)^2log(x-1)+x^2/4+C
+	$,
+)
+#comment[
+	第一步的凑微分有个有趣的技巧。如果凑成$dif x^2$的话，后续处理起来比较麻烦；但若凑成$dif(x^2-1)$就有个好处，分部积分时对$log(x+1)log(x-1)$求导后产生的分母$x+-1$能够与分子$x^2-1$约分，故分部之后产生的积分也是不带分母的，形式非常简单。
+]
+#question(
+	tag:"xlog(x^2+1)arctanx",
+	question:$integral x log(x^2+1)arctan x dif x$,
+	answer:$
+		&integral x log(x^2+1)arctan x dif x\
+		=&1/2integral log(x^2+1)arctan x dif(x^2+1)\
+		=&1/2(x^2+1)log(x^2+1)arctan x-integral x arctan x dif x-1/2integral log(x^2+1)dif x\
+		=&1/2(x^2+1)log(x^2+1)arctan x-1/2integral arctan x dif(x^2+1)-x/2log(x^2+1)+integral x^2/(x^2+1)dif x\
+		=&1/2(x^2+1)log(x^2+1)arctan x-1/2(x^2+1)arctan x+x/2-x/2log(x^2+1)+x-arctan x+C\
+		=&1/2(x^2+1)log(x^2+1)arctan x-x^2/2arctan x+3/2x-x/2log(x^2+1)-3/2arctan x+C
+	$,
+)
+#comment[
+	本题的凑微分报巧和#ref("xlog(x+1)log(x-1)")是一致的。无论是$log(x^2+1)$的导数还是$arctan x$的导数都带有$x^2+1$的分母，因此凑成$dif(x^2+1)$之后再分部就能够实现约分效果，从而让被积函数看上去不那么复杂。
+]
+#question(
+	tag:"(1+xlog^2x)/(1-xlogx)",
+	question:$integral (1+x log^2x)/(1-x log x)dif x$,
+	answer:$
+		integral (1+x log^2x)/(1-x log x)dif x=&integral (1+log x)/(1-x log x)dif x-integral (log x-x log^2x)/(1-x log x)dif x\
+		=&integral dif(x log x)/(1-x log x)-integral log x dif x\
+		=&-log abs(1-x log x)+x-x log x+C
+	$,
+)
+#comment[
+	本题应用了积木法。如果说$f(x)/p(x)^2$的结构很可能是通过$(f_0(x))/p(x)$求导得来的，那么$f(x)/p(x)$的原函数就要考虑$log abs(p(x))$的类型了。#parbreak()
+	本题的分母是$1-x log x$，因此在分子凑出$x log x$的导数，也即$1+log x$，是一个值得考虑的方向。
+]
+#question(
+	tag:"(1+x^(-x)(x^x)'')/(1+log^2ex)",
+	question:$integral (1+x^(-x)(x^x)'')/(1+log^2(ee x))dif x$,
+	answer:[考虑到$(x^x)'=x^x (1+log x)=x^x log(ee x)$，所以$
+		integral (1+x^(-x)(x^x)'')/(1+log^2(ee x))dif x=&integral (1+(x^x)''/x^x)/(1+[(x^x)'/x^x]^2)\
+		=&integral (1+[(x^x)'/x^x]^2-[(x^x)'/x^x]^2+(x^x)''/x^x)/(1+[(x^x)'/x^x]^2)dif x\
+		=&integral dif x+integral (x^x (x^x)''-[(x^x)']^2)/(x^x)^2/(1+[(x^x)'/x^x]^2)dif x\
+		=&x+integral dif[(x^x)'/x^x]/(1+[(x^x)'/x^x]^2)\
+		=&x+arctan[log(ee x)]+C
+	$],
+)
+#comment[
+	本题是分母为$u^2+v^2$的结构，如同#ref("(x+1+logx)/((x+1)^2+(xlogx)^2)")，应当考虑$arctan u/v$类型的原函数，于是就试导$(x^x)'/x^x=(x^x (x^x)''-[(x^x)']^2)/(x^x)^x$
+]
+#question(
+	tag:"e^(xe^x+x-e^x)(1+x^2e^x)",
+	question:$integral ee^(x ee^x+x-ee^x)(1+x^2ee^x)dif x$,
+	answer:$
+		integral ee^(x ee^x+x-ee^x)(1+x^2ee^x)dif x=&integral ee^((x-1)ee^x)(ee^x+x^2ee^(2x))dif x\
+		=&integral ee^((x-1)ee^x)ee^x dif x+integral x ee^x [x ee^x ee^((x-1)ee^x)]dif x\
+		=&integral ee^((x-1)ee^x)ee^x dif x+integral x ee^x dif ee^((x-1)ee^x)\
+		=&integral ee^((x-1)ee^x)ee^x dif x+x ee^x ee^((x-1)ee^x)-integral (x+1)ee^x ee^((x-1)ee^x)dif x\
+		=&x ee^x ee^((x-1)ee^x)-integral x ee^x ee^((x-1)ee^x)dif x\
+		=&(x ee^x-1)ee^((x-1)ee^x)+C
+	$,
+)
+#comment[
+	本题首先应当对复杂形式予以简化，比如$ee^(x ee^x+x-ee^x)=ee^x ee^((x-1)ee^x)$，这样才便于看清关键的结构。这里并未写出对$ee^((x-1)ee^x)$试导的过程，但试导仍是一种在辅助凑微分方面行之有效的方法。
+]
+#question(
+	tag:"e^(cosx)cos(x+sinx+a)",
+	question:$integral ee^(cos x)cos(x+sin x+a)$,
+	answer:$
+		&integral ee^(cos x)cos(x+sin x+a)dif x\
+		=&integral ee^(cos x)[cos x cos(sin x+a)-sin x sin(sin x+a)]dif x\
+		=&integral ee^(cos x)dif sin(sin x+a)+integral sin(sin x+a)dif ee^(cos x)\
+		=&ee^(cos x)sin(sin x+a)+C
+	$,
+)
+#comment[
+	这里出现了三角函数嵌套复合的情况，涉及到和角公式的应用。在使用和角公式之后，解决问题的思路才真正得以打开：指数复合函数部分能凑微分，三角复合函数部分也能凑微分，最后发现可以使用分部积分抵消功能求出原函数。
+]
+#question(
+	tag:"x^2/(sqrt(x^2+1)(xsinx+cosx))",
+	question:$integral (x^2dif x)/(sqrt(x^2+1)(x sin x+cos x))$,
+	answer:$
+		integral (x^2 dif x)/(sqrt(x^2+1)(x sin x+cos x))dif x=&sgn x integral x^2/((x^2+1)sin(x+arctan 1/x))dif x\
+		=&sgn x integral (1-1/(x^2+1))/sin(x+arctan 1/x)dif x\
+		=&sgn x integral dif(x-arctan x)/sin(x+arctan 1/x)\
+		=&sgn x integral csc(x+arctan 1/x)dif(x+arctan 1/x)\
+		=&log abs(tan (x+arctan 1/x)/2)sgn x+C
+	$,
+)
+#comment[
+	这是辅助角公式和反三角恒等式的应用。在应用辅助角公式时应当特别注意，$sin x$的系数需要是正数；倘若是负数，就应当在外部添负号。式中的$sgn x$就是因此产生的。
+]
+#question(
+	tag:"arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)",
+	question:$integral arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)dif x$,
+	answer:[考虑到$arcsin x=1/2arccos(1-2x^2)=pi/4-1/2arcsin(1-2x^2)space(x>=0)$，所以当$x>=0$时，$
+		&integral arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)dif x\
+		=&integral arcsin[arcsin(1-2x^2)]dif arcsin x\
+		=&-1/2integral arcsin[arcsin(1-2x^2)]dif arcsin(1-2x^2)\
+		=&-u/2arcsin u+1/2integral u dif arcsin u quad subst(u=arcsin(1-2x^2))\
+		=&-u/2arcsin u-1/2sqrt(1-u^2)+C_1\
+		=&-1/2arcsin(1-2x^2)arcsin[arcsin(1-2x^2)]-1/2sqrt(1-arcsin^2(1-2x^2))+C_1
+	$当$x<0$时，$
+		&integral arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)dif x\
+		=&-integral arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)dif(-x)\
+		=&1/2arcsin(1-2x^2)arcsin[arcsin(1-2x^2)]+1/2sqrt(1-arcsin^2(1-2x^2))+C_2
+	$综上所述，$
+		integral arcsin[arcsin(1-2x^2)]/sqrt(1-x^2)dif x=&-1/2arcsin(1-2x^2)arcsin[arcsin(1-2x^2)]sgn x\
+		&--1/2sqrt(1-arcsin^2(1-2x^2))sgn x+C
+	$],
+)
+#comment[
+	这里是对反三角函数恒等式的应用。在本题中，倘若不了解这个恒等式，也可以选择三角换元$subst(x=sin t)$来做，只不过更麻烦些。#parbreak()
+	另外，本题涉及到对$x$正负值的分类讨论。因为本题的被积函数是明显的偶函数，所以可以先将$x>=0$的情况求出；至于$x<0$的情况，可以凑微分$dif(-x)$使之适用于$-x>=0$的情况，直接套用结论即可。#ref("x^4/sqrt(x^2+1)")也用到了这种方法。
+]
+#question(
+	tag:"sin2nx/sinx",
+	question:$integral (sin 2n x)/(sin x)dif x space(n in NN_+)$,
+	answer:$
+		integral (sin 2n x)/(sin x)dif x=&integral (sum_(k=1)^n {sin 2k x-sin[(2k-2)x]})/(sin x)dif x\
+		=&integral (sum_(k=1)^n {2sin x cos[(2k-1)x]})/(sin x)dif x\
+		=&2sum_(k=1)^n integral cos[(2k-1)x]dif x\
+		=&2sum_(k=1)^n sin[(2k-1)x]/(2k-1)+C
+	$,
+)
+#comment[
+	本题用到了和差化积公式。这里首先将$sin 2n x$变为$n$个可以互相抵消的和式，然后对每个子式作和差化积，产生的$sin x$可以与分母约分，从而将这个式子改写成若干整三角函数的和，最后求解。#parbreak()
+	如果读者对$n$倍角公式的使用驾轻就熟，也可以直接套用来解题。
 ]
 #question(
 	tag:"(2n!sinx+x^n)/(e^x+sinx+cosx+sum_(k=0)^nx^k/k!)",

@@ -29,3 +29,7 @@
 #question-id.update(500)
 #include "collection/level-5.typ"
 #pagebreak(weak:true,to:"odd")
+== 难度六
+#question-id.update(600)
+#include "collection/level-6.typ"
+#pagebreak(weak:true,to:"odd")

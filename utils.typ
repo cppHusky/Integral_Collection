@@ -66,12 +66,12 @@
 	assert(args.len()==1 or args.len()==2)
 	let colors=(
 		none,
-		color.hsv(240deg,95%,50%),
-		color.hsv(120deg,95%,35%),
-		color.hsv(0deg,85%,40%),
 		color.hsv(180deg,95%,35%),
-		color.hsv(300deg,85%,40%),
 		color.hsv(60deg,100%,40%),
+		color.hsv(0deg,85%,40%),
+		color.hsv(240deg,95%,50%),
+		color.hsv(300deg,85%,40%),
+		color.hsv(120deg,95%,35%),
 	)
 	if type(args.at(0))==int{
 		let no=args.at(0)

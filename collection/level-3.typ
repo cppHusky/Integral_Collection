@@ -640,7 +640,7 @@
 	$],
 )
 #comment[
-	本题与#ref("sinlogx/x^2")虽然形式上有天嚷之别，但都能通过适当的换元化为同类问题。
+	本题与#ref("sinlogx/x^2")虽然形式上有天壤之别，但都能通过适当的换元化为同类问题。
 ]
 #question(
 	tag:"arcsinx/x^2dot(1+x^2)/sqrt(1-x^2)",

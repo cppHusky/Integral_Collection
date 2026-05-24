@@ -64,6 +64,7 @@
 		context pagenum.update(here().page())
 	})
 	show heading.where(level:1):it=>{
+		counter(heading).step()
 		set text(
 			size:30pt,
 			weight:"extrabold",
@@ -98,9 +99,38 @@
 				counter(page).display()
 				h(1fr)
 			}
-		}
+		},
+		foreground:context{
+			set text(size:9pt)
+			let alignment=if calc.odd(counter(page).get().first()) {
+				right+top
+			}
+			else {
+				left+top
+			}
+			let section=counter(heading).get().at(1)
+			place(
+				alignment,
+				dy:25mm+(3.4em+8pt)*(section -1)*3.2,
+				box(
+					height:3.4em+8pt,
+					width:1.4em,
+					fill:color.rgb("#e8d0d0"),
+					{
+						set text(
+							top-edge:"cap-height",
+							bottom-edge:"baseline",
+						)
+						set align(center+horizon)
+						set par(leading:4pt)
+						numbering("难度一",section)
+					},
+				)
+			)
+		},
 	)
 	show heading.where(level:2):it=>{
+		counter(heading).step(level:2)
 		set text(
 			size:21pt,
 			weight:"extrabold",

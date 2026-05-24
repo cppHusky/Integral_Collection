@@ -1,6 +1,5 @@
 #import "utils.typ":question-id
 #import "preset.typ":preset-collection
-#show:preset-collection
 #align(center+horizon)[
 	#set page(footer:none)
 	= 题集篇
@@ -9,6 +8,7 @@
 	]
 ]
 #pagebreak(weak:true,to:"odd")
+#show:preset-collection
 == 难度一
 #question-id.update(100)
 #include "collection/level-1.typ"

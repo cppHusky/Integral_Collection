@@ -108,19 +108,22 @@
 			place(
 				alignment,
 				dy:25mm+(3.4em+8pt)*(section -1)*3.2,
-				box(
-					height:3.4em+8pt,
-					width:1.4em,
-					fill:color.rgb("#e8d0d0"),
-					{
-						set text(
-							top-edge:"cap-height",
-							bottom-edge:"baseline",
-						)
-						set align(center+horizon)
-						set par(leading:4pt)
-						numbering("难度一",section)
-					},
+				link(
+					<outline>,
+					box(
+						height:3.4em+8pt,
+						width:1.4em,
+						fill:color.rgb("#e8d0d0"),
+						{
+							set text(
+								top-edge:"cap-height",
+								bottom-edge:"baseline",
+							)
+							set align(center+horizon)
+							set par(leading:4pt)
+							numbering("难度一",section)
+						},
+					)
 				)
 			)
 		},
@@ -154,19 +157,22 @@
 			place(
 				alignment,
 				dy:25mm+(6.4em+20pt)*(section -1)*2.4,
-				box(
-					height:6.4em+20pt,
-					width:1.4em,
-					fill:color.rgb("#d0d0e8"),
-					{
-						set text(
-							top-edge:"cap-height",
-							bottom-edge:"baseline",
-						)
-						set align(center+horizon)
-						set par(leading:3pt)
-						query(selector(heading).before(here())).last().body
-					},
+				link(
+					<outline>,
+					box(
+						height:6.4em+20pt,
+						width:1.4em,
+						fill:color.rgb("#d0d0e8"),
+						{
+							set text(
+								top-edge:"cap-height",
+								bottom-edge:"baseline",
+							)
+							set align(center+horizon)
+							set par(leading:3pt)
+							query(selector(heading).before(here())).last().body
+						},
+					)
 				)
 			)
 		},

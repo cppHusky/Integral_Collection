@@ -63,14 +63,10 @@
 		it
 		context pagenum.update(here().page())
 	})
-	show heading.where(level:1):it=>{
-		counter(heading).step()
-		set text(
-			size:30pt,
-			weight:"extrabold",
-		)
-		align(center,it)
-	}
+	show heading:set align(center)
+	show heading:set text(weight:"extrabold")
+	show heading.where(level:1):set text(size:30pt)
+	show heading.where(level:2):set text(size:21pt)
 	body
 }
 #let preset-frontmatter(body)={
@@ -129,14 +125,9 @@
 			)
 		},
 	)
-	show heading.where(level:2):it=>{
-		counter(heading).step(level:2)
-		set text(
-			size:21pt,
-			weight:"extrabold",
-		)
-		align(center,it)
-	}
+	show heading.where(level:2):set heading(
+		numbering:(..nums)=>[难度#numbering("一",nums.at(1))]
+	)
 	body
 }
 #let preset-lecture(body)={
@@ -150,15 +141,36 @@
 				counter(page).display()
 				h(1fr)
 			}
-		}
+		},
+		foreground:context{
+			set text(size:9pt)
+			let alignment=if calc.odd(counter(page).get().first()) {
+				right+top
+			}
+			else {
+				left+top
+			}
+			let section=counter(heading).get().at(1)
+			place(
+				alignment,
+				dy:25mm+(6.4em+20pt)*(section -1)*2.4,
+				box(
+					height:6.4em+20pt,
+					width:1.4em,
+					fill:color.rgb("#d0d0e8"),
+					{
+						set text(
+							top-edge:"cap-height",
+							bottom-edge:"baseline",
+						)
+						set align(center+horizon)
+						set par(leading:3pt)
+						query(selector(heading).before(here())).last().body
+					},
+				)
+			)
+		},
 	)
-	show heading.where(level:2):it=>{
-		set text(
-			size:21pt,
-			weight:"extrabold",
-		)
-		align(center,it)
-	}
 	show heading.where(level:2):set heading(
 		numbering:(..nums)=>[阶段#numbering("一",nums.at(1))]
 	)
@@ -172,28 +184,10 @@
 			all:true,
 		)
 	)
-	show heading.where(level:1):it=>{
-		set text(
-			size:21pt,
-			weight:"extrabold",
-		)
-		align(center,it)
-	}
-	show heading.where(level:1):set heading(
-		numbering:"附录A",
-	)
-	show heading.where(level:2):it=>{
-		set text(
-			size:18pt,
-			weight:"extrabold",
-		)
-		align(center,it)
-	}
-	show heading.where(level:2):set heading(
-		numbering:"A.1",
-	)
-	set heading(
-		supplement:"附录",
-	)
+	show heading.where(level:1):set text(size:21pt)
+	show heading.where(level:1):set heading(numbering:"附录A")
+	show heading.where(level:2):set text(size:18pt)
+	show heading.where(level:2):set heading(numbering:"A.1")
+	set heading(supplement:"附录")
 	body
 }

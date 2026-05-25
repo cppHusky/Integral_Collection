@@ -1,5 +1,6 @@
 #set page(
 	numbering:none,
+	header:none,
 	footer:none,
 )
 #pagebreak(weak:true,to:"even")

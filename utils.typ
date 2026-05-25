@@ -1,3 +1,7 @@
+#let page-break={
+	set page(header:none,footer:none)
+	pagebreak(weak:true,to:"odd")
+}
 #let question-id=counter("question")
 #let multi-eq-counter=counter("multi-eq")
 #show ref: it=>{

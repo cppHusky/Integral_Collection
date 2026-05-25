@@ -1,4 +1,20 @@
 #let math-state-counter=counter("math-state")
+#let is-clean=()=>{
+	let chapters=query(selector(<题集篇>).or(<讲义篇>))
+	chapters.any(c=>{
+		c.location().page()==here().page()
+	})
+}
+#let is-chap-page=()=>{
+	let chapters=query(
+		heading.where(level:1).or(
+			heading.where(level:2).after(<题集篇>).before(<积分常见结论>)
+		)
+	)
+	chapters.any(c=>{
+		c.location().page()==here().page()
+	})
+}
 #let preset(body)={
 	import "@preview/itemize:0.2.0"
 	set page(
@@ -10,14 +26,36 @@
 			inside:32mm,
 		),
 		numbering:"1",
-		footer:context{
-			if calc.odd(counter(page).get().first()) {
-				h(1fr)
-				counter(page).display()
-			} else {
-				counter(page).display()
-				h(1fr)
-			}
+		header:context if is-clean() {
+			none
+		} else if is-chap-page() {
+			none
+		} else {
+			block(
+				stroke:(
+					bottom:.5pt,
+				),
+				inset:(
+					bottom:3pt,
+				),
+				{
+					if calc.odd(counter(page).get().first()) {
+						h(1fr)
+						counter(page).display()
+					} else {
+						counter(page).display()
+						h(1fr)
+					}
+				}
+			)
+		},
+		footer:context if is-clean() {
+			none
+		} else if is-chap-page() {
+			set align(center)
+			counter(page).display()
+		} else {
+			none
 		},
 		number-align:center+bottom,
 	)
@@ -72,30 +110,13 @@
 #let preset-frontmatter(body)={
 	set page(
 		numbering:"i",
-		footer:context{
-			if calc.odd(counter(page).get().first()) {
-				h(1fr)
-				counter(page).display("i")
-			} else {
-				counter(page).display("i")
-				h(1fr)
-			}
-		}
 	)
 	body
 }
 #let preset-collection(body)={
 	show:preset
 	set page(
-		footer:context{
-			if calc.odd(counter(page).get().first()) {
-				h(1fr)
-				counter(page).display()
-			} else {
-				counter(page).display()
-				h(1fr)
-			}
-		},
+		numbering:"1",
 		foreground:context{
 			set text(size:9pt)
 			let alignment=if calc.odd(counter(page).get().first()) {
@@ -105,11 +126,18 @@
 				left+top
 			}
 			let section=counter(heading).get().at(1)
+			let label=label("难度"+numbering("一",section))
+			let label=if counter(page).get()==counter(page).at(label) {
+				<outline>
+			}
+			else {
+				label
+			}
 			place(
 				alignment,
 				dy:25mm+(3.4em+8pt)*(section -1)*3.2,
 				link(
-					<outline>,
+					label,
 					box(
 						height:3.4em+8pt,
 						width:1.4em,
@@ -136,15 +164,6 @@
 #let preset-lecture(body)={
 	show:preset
 	set page(
-		footer:context{
-			if calc.odd(counter(page).get().first()) {
-				h(1fr)
-				counter(page).display()
-			} else {
-				counter(page).display()
-				h(1fr)
-			}
-		},
 		foreground:context{
 			set text(size:9pt)
 			let alignment=if calc.odd(counter(page).get().first()) {
@@ -158,7 +177,7 @@
 				alignment,
 				dy:25mm+(6.4em+20pt)*(section -1)*2.4,
 				link(
-					<outline>,
+					label("阶段"+numbering("一",section)),
 					box(
 						height:6.4em+20pt,
 						width:1.4em,

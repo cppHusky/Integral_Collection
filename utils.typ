@@ -2,7 +2,6 @@
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
 }
-#let question-id=counter("question")
 #let multi-eq-counter=counter("multi-eq")
 #show ref: it=>{
 	let target=query(it.target).first()
@@ -13,6 +12,7 @@
 		if sup==auto {
 			sup=[Q]
 		}
+		let question-id=counter(figure.where(kind:"question"))
 		let num=numbering("1",..question-id.at(locate(it.target)))
 		link(it.target)[#sup#num]
 	}
@@ -22,30 +22,34 @@
 	category:black,//red,blue,black
 	question:[],
 	answer:[],
-)=block(width:100%,context{
-	parbreak()
-	counter(math.equation).update(0)
-	question-id.step()
-	block(width:100%,{
-		context text(fill:category,weight:"semibold")[
-			【Q#question-id.display()】
-			#label(tag)
-		]
-		question
-	})
-	parbreak()
-	block(width:100%,{
-		text(fill:category,weight:"bold")[【解】]
-		answer
-	})
-	parbreak()
-})
+)=figure(
+	kind:"question",
+	supplement:none,
+	block(width:100%,align(left,context{
+		let question-id=counter(figure.where(kind:"question"))
+		parbreak()
+		counter(math.equation).update(0)
+		block(width:100%,{
+			context text(fill:category,weight:"semibold")[
+				【Q#question-id.display()】
+				#label(tag)
+			]
+			question
+		})
+		parbreak()
+		block(width:100%,{
+			text(fill:category,weight:"bold")[【解】]
+			answer
+		})
+		parbreak()
+	}))
+)
 #let ref(id)=context underline(link(
 	label(id),
 	text(
 		fill:luma(128),
 		font:"Noto Serif"
-	)[【Q#question-id.at(query(label(id)).first().location()).first()】]
+	)[【Q#counter(figure.where(kind:"question")).at(query(label(id)).first().location()).first()】]
 ))
 #let comment(body)={
 	parbreak()

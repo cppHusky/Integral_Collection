@@ -105,6 +105,7 @@
 	show heading:set text(weight:"extrabold")
 	show heading.where(level:1):set text(size:30pt)
 	show heading.where(level:2):set text(size:21pt)
+	show figure.where(kind:"question"):set block(breakable:true)
 	body
 }
 #let preset-frontmatter(body)={

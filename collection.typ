@@ -1,4 +1,4 @@
-#import "utils.typ":question-id,page-break
+#import "utils.typ":page-break
 #import "preset.typ":preset-collection
 #align(center+horizon)[
 	= 题集篇<题集篇>
@@ -8,26 +8,26 @@
 #page-break
 #show:preset-collection
 == <难度一>
-#question-id.update(100)
+#counter(figure.where(kind:"question")).update(100)
 #include "collection/level-1.typ"
 #page-break
 == <难度二>
-#question-id.update(200)
+#counter(figure.where(kind:"question")).update(200)
 #include "collection/level-2.typ"
 #page-break
 == <难度三>
-#question-id.update(300)
+#counter(figure.where(kind:"question")).update(300)
 #include "collection/level-3.typ"
 #page-break
 == <难度四>
-#question-id.update(400)
+#counter(figure.where(kind:"question")).update(400)
 #include "collection/level-4.typ"
 #page-break
 == <难度五>
-#question-id.update(500)
+#counter(figure.where(kind:"question")).update(500)
 #include "collection/level-5.typ"
 #page-break
 == <难度六>
-#question-id.update(600)
+#counter(figure.where(kind:"question")).update(600)
 #include "collection/level-6.typ"
 #page-break

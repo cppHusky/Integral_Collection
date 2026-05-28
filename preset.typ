@@ -1,5 +1,5 @@
 #let math-state-counter=counter("math-state")
-#let is-clean=()=>{
+#let is-clear=()=>{
 	let chapters=query(selector(<题集篇>).or(<讲义篇>))
 	chapters.any(c=>{
 		c.location().page()==here().page()
@@ -15,6 +15,41 @@
 		c.location().page()==here().page()
 	})
 }
+#let book-header=()=>context{
+	if is-clear() {
+		none
+	} else if is-chap-page() {
+		none
+	} else {
+		block(
+			stroke:(
+				bottom:.5pt,
+			),
+			inset:(
+				bottom:3pt,
+			),
+			{
+				if calc.odd(counter(page).get().first()) {
+					h(1fr)
+					counter(page).display()
+				} else {
+					counter(page).display()
+					h(1fr)
+				}
+			}
+		)
+	}
+}
+#let book-footer=()=>context{
+	if is-clear() {
+		none
+	} else if is-chap-page() {
+		set align(center)
+		counter(page).display()
+	} else {
+		none
+	}
+}
 #let preset(body)={
 	import "@preview/itemize:0.2.0"
 	set page(
@@ -26,37 +61,8 @@
 			inside:32mm,
 		),
 		numbering:"1",
-		header:context if is-clean() {
-			none
-		} else if is-chap-page() {
-			none
-		} else {
-			block(
-				stroke:(
-					bottom:.5pt,
-				),
-				inset:(
-					bottom:3pt,
-				),
-				{
-					if calc.odd(counter(page).get().first()) {
-						h(1fr)
-						counter(page).display()
-					} else {
-						counter(page).display()
-						h(1fr)
-					}
-				}
-			)
-		},
-		footer:context if is-clean() {
-			none
-		} else if is-chap-page() {
-			set align(center)
-			counter(page).display()
-		} else {
-			none
-		},
+		header:book-header(),
+		footer:book-footer(),
 		number-align:center+bottom,
 	)
 	set text(

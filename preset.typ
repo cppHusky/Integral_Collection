@@ -100,29 +100,33 @@
 		left+top
 	}
 	let section=counter(heading).get().at(1)
-	let first-end=query(metadata).filter(data=>{
-		data.value.kind=="question" and data.value.side=="end" and data.value.page>=counter(page).get().first()
+	let match=query(metadata).filter(data=>{
+		data.value.kind=="question" and data.location().page()==here().page()
 	}).map(data=>{
 		data.value.number
-	}).first(default:counter(figure.where(kind:"question")).final().first())
-	let last-begin=query(metadata).filter(data=>{
-		data.value.kind=="question" and data.value.side=="begin" and data.value.page<=counter(page).get().first()
-	}).map(data=>{
-		data.value.number
-	}).last(default:101)
+	}).first(default:none)
+	let match=if match==none {
+		query(metadata).filter(data=>{
+			data.value.kind=="question" and data.location().page()<=here().page()
+		}).map(data=>{
+			data.value.number
+		}).last(default:none)
+	} else {
+		match
+	}
 	place(
 		alignment,
-		dy:25mm+6.4em*(section -1)*2.16,
+		dy:25mm+5.4em*(section -1)*2.6,
 		rotate(
 			90deg,
 			reflow:true,
 			box(
 				height:1.4em,
-				width:6.4em,
+				width:5.4em,
 				fill:color.rgb("#e8d0d0"),
 				align(
 					center+horizon,
-					numbering("Q1",first-end)+"-"+numbering("Q1",last-begin),
+					numbering("Q1",match)
 				),
 			)
 		)

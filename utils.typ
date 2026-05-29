@@ -29,9 +29,7 @@
 		let question-id=counter(figure.where(kind:"question"))
 		context metadata((
 			kind:"question",
-			side:"begin",
 			number:question-id.get().first(),
-			page:counter(page).get().first(),
 		))
 		set align(left)
 		parbreak()
@@ -49,12 +47,6 @@
 			answer
 		})
 		parbreak()
-		context metadata((
-			kind:"question",
-			side:"end",
-			number:question-id.get().first(),
-			page:counter(page).get().first(),
-		))
 	})
 )
 #let ref(id)=context underline(link(

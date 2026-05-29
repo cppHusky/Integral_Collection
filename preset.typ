@@ -30,11 +30,33 @@
 			),
 			{
 				if calc.odd(counter(page).get().first()) {
+					let heading-2=query(selector(heading.where(level:2).after(here()))).filter(h=>{
+						h.location().page()==here().page()
+					}).first(default:none)
+					let heading-2=if heading-2==none {
+						query(selector(heading.where(level:2).before(here()))).last()
+					} else {
+						heading-2
+					}
+					numbering(heading-2.numbering,..counter(heading).at(heading-2.location()))
+					heading-2.body
 					h(1fr)
 					counter(page).display()
 				} else {
+					let heading-1=query(selector(heading.where(level:1).after(here()))).filter(h=>{
+						h.location().page()==here().page()
+					}).first(default:none)
+					let heading-1=if heading-1==none {
+						query(selector(heading.where(level:1).before(here()))).last()
+					} else {
+						heading-1
+					}
 					counter(page).display()
 					h(1fr)
+					if heading-1.numbering!=none{
+						numbering(heading-1.numbering,..counter(heading).at(heading-1.location()))
+					}
+					heading-1.body
 				}
 			}
 		)

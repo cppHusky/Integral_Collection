@@ -50,6 +50,53 @@
 		none
 	}
 }
+#let collection-foreground=()=>context{
+	set text(size:9pt)
+	let alignment=if calc.odd(counter(page).get().first()) {
+		right+top
+	}
+	else {
+		left+top
+	}
+	let section=counter(heading).get().at(1)
+	let target-label=label("难度"+numbering("一",section))
+	let target-label=if counter(page).get()==counter(page).at(target-label) {
+		<outline>
+	}
+	else {
+		target-label
+	}
+	let first-end=query(metadata).filter(data=>{
+		data.value.kind=="question" and data.value.side=="end" and data.value.page>=counter(page).get().first()
+	}).map(data=>{
+		data.value.number
+	}).first(default:counter(figure.where(kind:"question")).final().first())
+	let last-begin=query(metadata).filter(data=>{
+		data.value.kind=="question" and data.value.side=="begin" and data.value.page<=counter(page).get().first()
+	}).map(data=>{
+		data.value.number
+	}).last(default:101)
+	place(
+		alignment,
+		dy:25mm+6.4em*(section -1)*2.16,
+		link(
+			target-label,
+			rotate(
+				90deg,
+				reflow:true,
+				box(
+					height:1.4em,
+					width:6.4em,
+					fill:color.rgb("#e8d0d0"),
+					align(
+						center+horizon,
+						numbering("Q1",first-end)+"-"+numbering("Q1",last-begin),
+					),
+				)
+			)
+		)
+	)
+}
 #let preset(body)={
 	import "@preview/itemize:0.2.0"
 	set page(
@@ -124,44 +171,7 @@
 	show:preset
 	set page(
 		numbering:"1",
-		foreground:context{
-			set text(size:9pt)
-			let alignment=if calc.odd(counter(page).get().first()) {
-				right+top
-			}
-			else {
-				left+top
-			}
-			let section=counter(heading).get().at(1)
-			let label=label("难度"+numbering("一",section))
-			let label=if counter(page).get()==counter(page).at(label) {
-				<outline>
-			}
-			else {
-				label
-			}
-			place(
-				alignment,
-				dy:25mm+(3.4em+8pt)*(section -1)*3.2,
-				link(
-					label,
-					box(
-						height:3.4em+8pt,
-						width:1.4em,
-						fill:color.rgb("#e8d0d0"),
-						{
-							set text(
-								top-edge:"cap-height",
-								bottom-edge:"baseline",
-							)
-							set align(center+horizon)
-							set par(leading:4pt)
-							numbering("难度一",section)
-						},
-					)
-				)
-			)
-		},
+		foreground:collection-foreground(),
 	)
 	show heading.where(level:2):set heading(
 		numbering:(..nums)=>[难度#numbering("一",nums.at(1))]

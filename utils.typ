@@ -25,8 +25,15 @@
 )=figure(
 	kind:"question",
 	supplement:none,
-	block(width:100%,align(left,context{
+	block(width:100%,context{
 		let question-id=counter(figure.where(kind:"question"))
+		context metadata((
+			kind:"question",
+			side:"begin",
+			number:question-id.get().first(),
+			page:counter(page).get().first(),
+		))
+		set align(left)
 		parbreak()
 		counter(math.equation).update(0)
 		block(width:100%,{
@@ -42,7 +49,13 @@
 			answer
 		})
 		parbreak()
-	}))
+		context metadata((
+			kind:"question",
+			side:"end",
+			number:question-id.get().first(),
+			page:counter(page).get().first(),
+		))
+	})
 )
 #let ref(id)=context underline(link(
 	label(id),

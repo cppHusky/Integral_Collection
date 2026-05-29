@@ -30,32 +30,45 @@
 		context metadata((
 			kind:"question",
 			number:question-id.get().first(),
+			tag:tag,
 		))
 		set align(left)
 		parbreak()
 		counter(math.equation).update(0)
 		block(width:100%,{
-			context text(fill:category,weight:"semibold")[
-				【Q#question-id.display()】
-				#label(tag)
-			]
+			text(
+				fill:category,
+				weight:"semibold",
+				question-id.display("【Q1】"),
+			)
 			question
 		})
 		parbreak()
 		block(width:100%,{
-			text(fill:category,weight:"bold")[【解】]
+			text(
+				fill:category,
+				weight:"semibold",
+				"【解】",
+			)
 			answer
 		})
 		parbreak()
 	})
 )
-#let ref(id)=context underline(link(
-	label(id),
-	text(
+#let ref(tag)=context{
+	let target=query(selector(metadata)).filter(d=>{
+		d.value.kind=="question" and d.value.tag==tag
+	}).first()
+	show:underline
+	set text(
 		fill:luma(128),
 		font:"Noto Serif"
-	)[【Q#counter(figure.where(kind:"question")).at(query(label(id)).first().location()).first()】]
-))
+	)
+	link(
+		target.location(),
+		numbering("【Q1】",target.value.number),
+	)
+}
 #let comment(body)={
 	parbreak()
 	set text(

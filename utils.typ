@@ -2,7 +2,6 @@
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
 }
-#let multi-eq-counter=counter("multi-eq")
 #show ref: it=>{
 	let target=query(it.target).first()
 	if type(target)!=content or target.func()!=metadata or target.value!="question" {
@@ -26,6 +25,7 @@
 	kind:"question",
 	supplement:none,
 	block(width:100%,context{
+		counter(figure.where(kind:"sub-eq")).update(0)
 		let question-id=counter(figure.where(kind:"question"))
 		context metadata((
 			kind:"question",
@@ -118,31 +118,35 @@
 	}
 }
 #let multi-eq(with-number:false,..args)=block(width:100%,context{
-	multi-eq-counter.step()
+	let tag=query(selector(metadata).before(here())).filter(d=>{
+		d.value.kind=="question"
+	}).last().value.tag
 	set math.equation(numbering:none)
 	let widths=args.pos().map(measure).map(w=>w.width)
 	let max-width=calc.max(..widths)
-	let initial-number=counter(math.equation).get().first()
 	show:align.with(center)
 	if with-number{
-		args.pos().zip(widths).enumerate(start:1).map(((i,(it,width)))=>{
-			let number=numbering("(1)",initial-number+i)
-			counter(math.equation).step()
-			block(width:100%,{
+		args.pos().zip(widths).map(((it,width))=>figure(
+			kind:"sub-eq",
+			supplement:none,
+			block(width:100%,context{
+				let number=counter(figure.where(kind:"sub-eq")).get().first()
+				metadata((
+					kind:"sub-eq",
+					tag:tag,
+					number:counter(figure.where(kind:"sub-eq")).get().first(),
+				))
 				move(
 					dx:(width - max-width)/2,
-					context[
-						#it
-						#label("multi-eq-"+str(multi-eq-counter.get().first())+"-"+str(i))
-					],
+					it,
 				)
 				place(
 					right,
 					dy:-1.5em,
-					number,
+					numbering("(1)",number),
 				)
-			})
-		}).join()
+			}),
+		)).join()
 	}
 	else{
 		args.pos().zip(widths).map(((it,width))=>{
@@ -153,8 +157,16 @@
 		}).join()
 	}
 })
-#let ref-eq(i)=context link(
-	label("multi-eq-"+str(multi-eq-counter.get().first())+"-"+str(i)),
-	[(#i)],
-)
+#let ref-eq(number)=context{
+	let tag=query(selector(metadata).before(here())).filter(d=>{
+		d.value.kind=="question"
+	}).last().value.tag
+	let target=query(selector(metadata)).filter(d=>{
+		d.value.kind=="sub-eq" and d.value.tag==tag and d.value.number==number
+	}).first()
+	link(
+		target.location(),
+		numbering("(1)",number),
+	)
+}
 #let noindent=h(-2em)

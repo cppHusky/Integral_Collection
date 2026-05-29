@@ -2,20 +2,6 @@
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
 }
-#show ref: it=>{
-	let target=query(it.target).first()
-	if type(target)!=content or target.func()!=metadata or target.value!="question" {
-		it
-	} else {
-		let sup=it.supplement
-		if sup==auto {
-			sup=[Q]
-		}
-		let question-id=counter(figure.where(kind:"question"))
-		let num=numbering("1",..question-id.at(locate(it.target)))
-		link(it.target)[#sup#num]
-	}
-}
 #let question(
 	tag:"",
 	category:black,//red,blue,black

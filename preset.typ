@@ -38,10 +38,18 @@
 					} else {
 						heading-2
 					}
-					numbering(heading-2.numbering,..counter(heading).at(heading-2.location()))
-					heading-2.body
+					link(
+						heading-2.location(),
+						{
+							numbering(heading-2.numbering,..counter(heading).at(heading-2.location()))
+							heading-2.body
+						},
+					)
 					h(1fr)
-					counter(page).display()
+					link(
+						<outline>,
+						counter(page).display(),
+					)
 				} else {
 					let heading-1=query(selector(heading.where(level:1).after(here()))).filter(h=>{
 						h.location().page()==here().page()
@@ -51,12 +59,20 @@
 					} else {
 						heading-1
 					}
-					counter(page).display()
+					link(
+						<outline>,
+						counter(page).display(),
+					)
 					h(1fr)
-					if heading-1.numbering!=none{
-						numbering(heading-1.numbering,..counter(heading).at(heading-1.location()))
-					}
-					heading-1.body
+					link(
+						heading-1.location(),
+						{
+							if heading-1.numbering!=none{
+								numbering(heading-1.numbering,..counter(heading).at(heading-1.location()))
+							}
+							heading-1.body
+						},
+					)
 				}
 			}
 		)
@@ -67,7 +83,10 @@
 		none
 	} else if is-chap-page() {
 		set align(center)
-		counter(page).display()
+		link(
+			<outline>,
+			counter(page).display(),
+		)
 	} else {
 		none
 	}
@@ -81,13 +100,6 @@
 		left+top
 	}
 	let section=counter(heading).get().at(1)
-	let target-label=label("难度"+numbering("一",section))
-	let target-label=if counter(page).get()==counter(page).at(target-label) {
-		<outline>
-	}
-	else {
-		target-label
-	}
 	let first-end=query(metadata).filter(data=>{
 		data.value.kind=="question" and data.value.side=="end" and data.value.page>=counter(page).get().first()
 	}).map(data=>{
@@ -101,20 +113,17 @@
 	place(
 		alignment,
 		dy:25mm+6.4em*(section -1)*2.16,
-		link(
-			target-label,
-			rotate(
-				90deg,
-				reflow:true,
-				box(
-					height:1.4em,
-					width:6.4em,
-					fill:color.rgb("#e8d0d0"),
-					align(
-						center+horizon,
-						numbering("Q1",first-end)+"-"+numbering("Q1",last-begin),
-					),
-				)
+		rotate(
+			90deg,
+			reflow:true,
+			box(
+				height:1.4em,
+				width:6.4em,
+				fill:color.rgb("#e8d0d0"),
+				align(
+					center+horizon,
+					numbering("Q1",first-end)+"-"+numbering("Q1",last-begin),
+				),
 			)
 		)
 	)

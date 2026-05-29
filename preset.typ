@@ -102,14 +102,10 @@
 	let section=counter(heading).get().at(1)
 	let match=query(metadata).filter(data=>{
 		data.value.kind=="question" and data.location().page()==here().page()
-	}).map(data=>{
-		data.value.number
 	}).first(default:none)
 	let match=if match==none {
 		query(metadata).filter(data=>{
 			data.value.kind=="question" and data.location().page()<=here().page()
-		}).map(data=>{
-			data.value.number
 		}).last(default:none)
 	} else {
 		match
@@ -120,14 +116,17 @@
 		rotate(
 			90deg,
 			reflow:true,
-			box(
-				height:1.4em,
-				width:5.4em,
-				fill:color.rgb("#e8d0d0"),
-				align(
-					center+horizon,
-					numbering("Q1",match)
-				),
+			link(
+				match.location(),
+				box(
+					height:1.4em,
+					width:5.4em,
+					fill:color.rgb("#e8d0d0"),
+					align(
+						center+horizon,
+						numbering("Q1",match.value.number)
+					),
+				)
 			)
 		)
 	)

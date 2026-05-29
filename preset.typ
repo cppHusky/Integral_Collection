@@ -41,7 +41,7 @@
 					link(
 						heading-2.location(),
 						{
-							numbering(heading-2.numbering,..counter(heading).at(heading-2.location()))
+							counter(heading).display(heading-2.numbering)
 							heading-2.body
 						},
 					)
@@ -68,7 +68,7 @@
 						heading-1.location(),
 						{
 							if heading-1.numbering!=none{
-								numbering(heading-1.numbering,..counter(heading).at(heading-1.location()))
+								counter(heading.where(level:1)).display(heading-1.numbering)
 							}
 							heading-1.body
 						},
@@ -208,7 +208,7 @@
 		foreground:collection-foreground(),
 	)
 	show heading.where(level:2):set heading(
-		numbering:(..nums)=>[难度#numbering("一",nums.at(1))]
+		numbering:(..nums)=>numbering("难度一",nums.at(1)),
 	)
 	body
 }
@@ -228,7 +228,7 @@
 				alignment,
 				dy:25mm+(6.4em+20pt)*(section -1)*2.4,
 				link(
-					label("阶段"+numbering("一",section)),
+					label(numbering("阶段一",section)),
 					box(
 						height:6.4em+20pt,
 						width:1.4em,
@@ -248,7 +248,7 @@
 		},
 	)
 	show heading.where(level:2):set heading(
-		numbering:(..nums)=>[阶段#numbering("一",nums.at(1))]
+		numbering:(..nums)=>numbering("阶段一",nums.at(1)),
 	)
 	body
 }

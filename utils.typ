@@ -56,7 +56,6 @@
 	)
 }
 #let comment(body)={
-	parbreak()
 	set text(
 		font:"Zhuque Fangsong (technical preview)",
 	)
@@ -66,8 +65,19 @@
 			all:true
 		),
 	)
-	body
-	parbreak()
+	show quote.where(block:true):set pad(
+		x:0mm,
+		y:-1em,
+	)
+	quote(
+		block:true,
+		quotes:false,
+		{
+			parbreak()
+			body
+			parbreak()
+		},
+	)
 }
 #let subst(..args)={
 	set text(fill:purple)

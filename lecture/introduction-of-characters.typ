@@ -1,0 +1,45 @@
+#import "../utils.typ":chara
+#let header-text=place(
+	center+horizon,
+		text(
+		size:30pt,
+		weight:"semibold",
+		[主要出场人物],
+	)
+)
+#show:page.with(
+	header:context place(
+		top,
+		dx:-page.margin.outside,
+		block(
+			fill:silver,
+			width:page.width,
+			height:100%,
+			header-text,
+		),
+	),
+	footer:none,
+)
+#grid(
+	columns:(1fr,8fr),
+	align:horizon,
+	inset:(
+		y:2mm,
+	),
+	chara.杨秉.avatar,
+	[
+		杨秉，男，43岁，教授。
+	],
+	chara.严佩.avatar,
+	[
+		严佩，男，36岁，讲师。
+	],
+	chara.温舒.avatar,
+	[
+		温舒，女，24岁，助教。
+	],
+	chara.牛弘.avatar,
+	[
+		牛弘，男，22岁，助教。
+	],
+)

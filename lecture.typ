@@ -5,7 +5,7 @@
 	#show:text.with(font:"Zhuque Fangsong (technical preview)")
 	分门别类 深入浅出
 ]
-#page-break
+#include "lecture/introduction-of-characters.typ"
 #show:preset-lecture
 #counter(heading).update(0)
 == 有理函数积分<阶段一>

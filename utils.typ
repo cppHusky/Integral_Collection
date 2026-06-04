@@ -166,3 +166,22 @@
 	)
 }
 #let noindent=h(-2em)
+#let chara=(
+	杨秉:(
+		name:"杨秉",
+		avatar:circle(fill:lime,"杨"),
+	),
+	严佩:(
+		name:"严佩",
+		avatar:circle(fill:yellow,"严"),
+	),
+	温舒:(
+		name:"温舒",
+		avatar:circle(fill:rgb("ff70de"),"温"),
+	),
+	牛弘:(
+		name:"牛弘",
+		avatar:circle(fill:aqua,"牛"),
+	),
+	default:(),
+)

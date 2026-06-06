@@ -192,6 +192,7 @@
 	show heading:set text(weight:"extrabold")
 	show heading.where(level:1):set text(size:30pt)
 	show heading.where(level:2):set text(size:21pt)
+	show heading.where(level:3):set text(size:16pt)
 	show figure.where(kind:"question"):set block(breakable:true)
 	body
 }
@@ -240,16 +241,33 @@
 							)
 							set align(center+horizon)
 							set par(leading:3pt)
-							query(selector(heading).before(here())).last().body
+							query(selector(heading.where(level:3)).before(here())).last().body
 						},
 					)
 				)
 			)
 		},
 	)
+	set par(
+		first-line-indent:(
+			amount:2em,
+			all:true,
+		),
+	)
 	show heading.where(level:2):set heading(
 		numbering:(..nums)=>numbering("阶段一",nums.at(1)),
 	)
+	show heading.where(level:3):set heading(
+		numbering:(..nums)=>numbering("一、1",..nums.pos().slice(1)),
+	)
+	show heading.where(level:4):set heading(
+		numbering:(..nums)=>numbering("1.1",..nums.pos().slice(2)),
+	)
+	show heading.where(level:4):set align(left)
+	show emph:set text(
+		font:"Zhuque Fangsong (technical preview)",
+	)
+	show emph:it=>[【#it】]
 	body
 }
 #let preset-appendix(body)={

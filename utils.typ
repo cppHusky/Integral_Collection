@@ -167,21 +167,62 @@
 }
 #let noindent=h(-2em)
 #let chara=(
-	杨秉:(
-		name:"杨秉",
-		avatar:circle(fill:lime,"杨"),
-	),
-	严佩:(
-		name:"严佩",
-		avatar:circle(fill:yellow,"严"),
-	),
-	温舒:(
-		name:"温舒",
-		avatar:circle(fill:rgb("ff70de"),"温"),
-	),
-	牛弘:(
-		name:"牛弘",
-		avatar:circle(fill:aqua,"牛"),
-	),
-	default:(),
+	杨秉:"Yang Bing",
+	严佩:"Yan Pei",
+	温舒:"Wen Shu",
+	牛弘:"Niu Hong",
+	"none":"",
 )
+#let avatar(c)={
+	set circle(
+		radius:12pt,
+		inset:3.5pt,
+	)
+	set text(font:"Noto Sans CJK SC")
+	if c==chara.杨秉 {
+		circle(fill:lime,"杨")
+	} else if c==chara.严佩 {
+		circle(fill:yellow,"严")
+	} else if c==chara.温舒 {
+		circle(fill:rgb("ff88d8"),"温")
+	} else if c==chara.牛弘 {
+		circle(fill:aqua,"牛")
+	} else {
+		none
+	}
+}
+#let chara-background(c)={
+	if c==chara.杨秉 {
+		rgb("f7fff7")
+	} else if c==chara.严佩 {
+		rgb("fffff1")
+	} else if c==chara.温舒 {
+		rgb("fff7f7")
+	} else if c==chara.牛弘 {
+		rgb("f7f7ff")
+	} else {
+		rgb("fbfbfb")
+	}
+}
+#let lesson(..args)=context{
+	let arr=()
+	for row in args.pos() {
+		let speaker=row.at(0)
+		let message=row.at(1)
+		arr.push(grid.cell(
+			avatar(speaker),
+		))
+		arr.push(grid.cell(
+			fill:chara-background(speaker),
+			inset:(
+				x:5pt,
+				y:par.leading/2,
+			),
+			message,
+		))
+	}
+	grid(
+		columns:(0fr,1fr),
+		..arr,
+	)
+}

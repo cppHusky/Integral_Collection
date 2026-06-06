@@ -9,6 +9,7 @@
 #show:preset-lecture
 #counter(heading).update(0)
 == 有理函数积分<阶段一>
+#include "lecture/有理函数积分.typ"
 #page-break
 == 三角函数积分<阶段二>
 #page-break

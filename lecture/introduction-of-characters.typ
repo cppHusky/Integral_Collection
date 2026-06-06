@@ -1,4 +1,4 @@
-#import "../utils.typ":chara
+#import "../utils.typ":chara,avatar
 #let header-text=place(
 	center+horizon,
 		text(
@@ -26,19 +26,19 @@
 	inset:(
 		y:2mm,
 	),
-	chara.杨秉.avatar,
+	avatar(chara.杨秉),
 	[
 		杨秉，男，43岁，教授。
 	],
-	chara.严佩.avatar,
+	avatar(chara.严佩),
 	[
 		严佩，男，36岁，讲师。
 	],
-	chara.温舒.avatar,
+	avatar(chara.温舒),
 	[
 		温舒，女，24岁，助教。
 	],
-	chara.牛弘.avatar,
+	avatar(chara.牛弘),
 	[
 		牛弘，男，22岁，助教。
 	],

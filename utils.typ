@@ -222,7 +222,15 @@
 				x:5pt,
 				y:par.leading/2,
 			),
-			message,
+			if speaker==chara.none {
+				set text(
+					font:"Zhuque Fangsong (technical preview)",
+					size:10pt,
+				)
+				message
+			} else {
+				message
+			}
 		))
 	}
 	grid(

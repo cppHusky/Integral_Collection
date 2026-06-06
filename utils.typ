@@ -177,16 +177,20 @@
 	set circle(
 		radius:12pt,
 		inset:3.5pt,
+		stroke:none,
 	)
-	set text(font:"Noto Sans CJK SC")
+	set text(
+		font:"Noto Sans CJK SC",
+		fill:navy,
+	)
 	if c==chara.杨秉 {
-		circle(fill:lime,"杨")
+		circle("杨")
 	} else if c==chara.严佩 {
-		circle(fill:yellow,"严")
+		circle("严")
 	} else if c==chara.温舒 {
-		circle(fill:rgb("ff88d8"),"温")
+		circle("温")
 	} else if c==chara.牛弘 {
-		circle(fill:aqua,"牛")
+		circle("牛")
 	} else {
 		none
 	}

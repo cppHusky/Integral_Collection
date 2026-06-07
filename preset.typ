@@ -102,11 +102,11 @@
 	}
 	let section=counter(heading).get().at(1)
 	let match=query(metadata).filter(data=>{
-		data.value.kind=="question" and data.location().page()==here().page()
+		data.value.keys().contains("kind") and data.value.kind=="question" and data.location().page()==here().page()
 	}).first(default:none)
 	let match=if match==none {
 		query(metadata).filter(data=>{
-			data.value.kind=="question" and data.location().page()<=here().page()
+			data.value.keys().contains("kind") and data.value.kind=="question" and data.location().page()<=here().page()
 		}).last(default:none)
 	} else {
 		match
@@ -157,6 +157,10 @@
 		size:10.5pt,
 		top-edge:"bounds",
 		bottom-edge:"bounds",
+		costs:(
+			widow:0%,
+			orphan:0%,
+		),
 	)
 	set par(
 		justify:true,

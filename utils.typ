@@ -43,7 +43,7 @@
 )
 #let ref(tag)=context{
 	let target=query(selector(metadata)).filter(d=>{
-		d.value.kind=="question" and d.value.tag==tag
+		d.value.keys().contains("kind") and d.value.kind=="question" and d.value.tag==tag
 	}).first()
 	show:underline
 	set text(
@@ -155,10 +155,10 @@
 })
 #let ref-eq(number)=context{
 	let tag=query(selector(metadata).before(here())).filter(d=>{
-		d.value.kind=="question"
+		d.value.keys().contains("kind") and d.value.kind=="question"
 	}).last().value.tag
 	let target=query(selector(metadata)).filter(d=>{
-		d.value.kind=="sub-eq" and d.value.tag==tag and d.value.number==number
+		d.value.keys().contains("kind") and d.value.kind=="sub-eq" and d.value.tag==tag and d.value.number==number
 	}).first()
 	link(
 		target.location(),
@@ -172,6 +172,7 @@
 	温舒:"温舒",
 	牛弘:"牛弘",
 	施仁:"施仁",
+	肖虑:"肖虑",
 	"none":"",
 )
 #let avatar(c)={
@@ -194,6 +195,8 @@
 		circle("牛")
 	} else if c==chara.施仁 {
 		circle("施")
+	} else if c==chara.肖虑 {
+		circle("肖")
 	} else {
 		none
 	}

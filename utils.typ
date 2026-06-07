@@ -167,10 +167,11 @@
 }
 #let noindent=h(-2em)
 #let chara=(
-	杨秉:"Yang Bing",
-	严佩:"Yan Pei",
-	温舒:"Wen Shu",
-	牛弘:"Niu Hong",
+	杨秉:"杨秉",
+	严佩:"严佩",
+	温舒:"温舒",
+	牛弘:"牛弘",
+	施仁:"施仁",
 	"none":"",
 )
 #let avatar(c)={
@@ -191,6 +192,8 @@
 		circle("温")
 	} else if c==chara.牛弘 {
 		circle("牛")
+	} else if c==chara.施仁 {
+		circle("施")
 	} else {
 		none
 	}

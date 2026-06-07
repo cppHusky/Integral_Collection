@@ -4,5 +4,5 @@
 = 序<序>
 本书以CC-0协议发布于#link("https://github.com/cppHusky/IntegralCollection.git")[GitHub]。
 #page-break
-#outline()<outline>
+#outline(depth:3)<outline>
 #page-break

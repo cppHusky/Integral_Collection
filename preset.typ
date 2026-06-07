@@ -42,6 +42,7 @@
 						heading-2.location(),
 						{
 							counter(heading).display(heading-2.numbering)
+							" "
 							heading-2.body
 						},
 					)

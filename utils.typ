@@ -197,8 +197,6 @@
 		circle("施")
 	} else if c==chara.肖虑 {
 		circle("肖")
-	} else {
-		none
 	}
 }
 #let chara-background(c)={
@@ -217,27 +215,36 @@
 #let lesson(..args)=context{
 	let arr=()
 	for row in args.pos() {
-		let speaker=row.at(0)
-		let message=row.at(1)
-		arr.push(grid.cell(
-			avatar(speaker),
-		))
-		arr.push(grid.cell(
-			fill:chara-background(speaker),
-			inset:(
-				x:5pt,
-				y:par.leading/2,
-			),
-			if speaker==chara.none {
-				set text(
+		if type(row)==content {
+			let message=row
+			arr.push(grid.cell(
+				colspan:2,
+				fill:chara-background(none),
+				inset:(
+					x:5pt,
+					y:par.leading/2,
+				),
+				text(
 					font:"Zhuque Fangsong (technical preview)",
 					size:10pt,
+					message,
 				)
+			))
+		} else {
+			let speaker=row.at(0)
+			let message=row.at(1)
+			arr.push(grid.cell(
+				avatar(speaker),
+			))
+			arr.push(grid.cell(
+				fill:chara-background(speaker),
+				inset:(
+					x:5pt,
+					y:par.leading/2,
+				),
 				message
-			} else {
-				message
-			}
-		))
+			))
+		}
 	}
 	grid(
 		columns:(0fr,1fr),

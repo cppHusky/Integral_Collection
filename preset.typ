@@ -274,9 +274,6 @@
 		size:10pt,
 	)
 	show emph:it=>[（#it）]
-	set figure(
-		placement:auto,
-	)
 	body
 }
 #let preset-appendix(body)={

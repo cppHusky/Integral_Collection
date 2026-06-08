@@ -277,6 +277,7 @@
 			r^5(cos 5theta+ii sin 5theta)=&1(cos pi+ii sin pi)
 		$#noindent 模长和辐角要分别相等，所以这个模长肯定是$r=1$没错。至于辐角呢……现在我们来看看温助教画的这个圆。#parbreak()
 		#figure(
+			placement:auto,
 			cetz.canvas(x:25mm,y:25mm,{
 				import cetz.draw:*
 				import calc:pi,sin,cos

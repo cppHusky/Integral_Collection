@@ -1,3 +1,4 @@
+#import "lecture/names.typ":chara,avatar,chara-background
 #let page-break={
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
@@ -166,52 +167,6 @@
 	)
 }
 #let noindent=h(-2em)
-#let chara=(
-	杨秉:"杨秉",
-	严佩:"严佩",
-	温舒:"温舒",
-	牛弘:"牛弘",
-	施仁:"施仁",
-	肖虑:"肖虑",
-	"none":"",
-)
-#let avatar(c)={
-	set circle(
-		radius:12pt,
-		inset:3.5pt,
-		stroke:none,
-	)
-	set text(
-		font:"Noto Sans CJK SC",
-		fill:navy,
-	)
-	if c==chara.杨秉 {
-		circle("杨")
-	} else if c==chara.严佩 {
-		circle("严")
-	} else if c==chara.温舒 {
-		circle("温")
-	} else if c==chara.牛弘 {
-		circle("牛")
-	} else if c==chara.施仁 {
-		circle("施")
-	} else if c==chara.肖虑 {
-		circle("肖")
-	}
-}
-#let chara-background(c)={
-	if c==chara.杨秉 {
-		rgb("f7fff7")
-	} else if c==chara.严佩 {
-		rgb("fffff1")
-	} else if c==chara.温舒 {
-		rgb("fff7f7")
-	} else if c==chara.牛弘 {
-		rgb("f7f7ff")
-	} else {
-		rgb("fbfbfb")
-	}
-}
 #let lesson(..args)=context{
 	let arr=()
 	for row in args.pos() {

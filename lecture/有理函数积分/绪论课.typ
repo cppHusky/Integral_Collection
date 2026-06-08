@@ -1,4 +1,5 @@
-#import "../../utils.typ":lesson,chara,noindent
+#import "/utils.typ":lesson,chara,noindent
+#import "/math.typ":ii
 #import "@preview/cetz:0.5.2"
 #lesson(
 	(chara.严佩,[
@@ -44,7 +45,7 @@
 		我来提问一下……_翻找_哎，花名册去哪了？算了，第一排这位同学_指_你叫什么名字？#parbreak()
 	]),
 	(chara.施仁,[
-		_起立_我叫施仁。#parbreak()
+		_起身_我叫施仁。#parbreak()
 	]),
 	(chara.杨秉,[
 		好，施同学，请问：$0$是不是多项式？#parbreak()
@@ -107,7 +108,7 @@
 		$#noindent 来提问一下……施仁后面那位同学，_指_你叫什么名字？
 	]),
 	(chara.肖虑,[
-		_起立_肖虑。#parbreak()
+		_起身_肖虑。#parbreak()
 	]),
 	(chara.杨秉,[
 		好，肖同学，拿到这个方程，你的思路是什么？#parbreak()
@@ -182,3 +183,194 @@
 	]),
 )
 ==== 多项式的因式分解
+#lesson(
+	(chara.杨秉,[
+		刚才提到了因式分解，那我就接着往下说。我们求多项式方程的根，目的也是为了进行因式分解。如果一个$n$次多项式$P(x)$对应方程的根分别是$x_1,x_2,x_3,...x_n$，那我们就可以把它表示成$
+			P(x)=product_(k=1)^n (x-x_k)
+		$#noindent 的形式。#parbreak()
+		我们举个例子，$x^2-3x+1=0$，它的两个根是……_按计算器_$(3+-sqrt(5))/2$。那我们就能得出结论，$
+			x^2-3x+1=(x-(3-sqrt(5))/2)(x-(3+sqrt(5))/2).
+		$#parbreak()
+		再看$x^2+1=0$，它的根是$+-sqrt(-1)$。大家肯定都学过复数，它用复数表示就是$+-ii$。所以$
+			x^2+1=(x-ii)(x+ii).
+		$#noindent 不过这样就把实数域的问题带到复数域中了，自找麻烦，没必要。在因式分解的过程中，如果出现$Delta<0$的二次因式，我们原样保留就行了。#parbreak()
+		除了直接求根以外，因式分解还有一个非常通用的方法，就是套公式。常见的公式有这么几个：
+		- 完全平方公式：$a^2+2a b+b^2=(a+b)^2$；
+		- 平方差公式：$a^2-b^2=(a-b)(a+b)$；
+		- 立方和公式：$a^3+b^3=(a+b)(a^2-a b+b^2)$；
+		- 立方差公式：$a^3-b^3=(a-b)(a^2+a b+b^2)$。
+		好，现在考一考大家……肖虑后面那位同学，_指_你叫什么名字？#parbreak()
+	]),
+	(chara.李清,[
+		_起身_我叫李清。#parbreak()
+	]),
+	(chara.杨秉,[
+		好，李同学，请问$x^4-1$这个式子怎么分解？有思路吗？#parbreak()
+	]),
+	(chara.李清,[
+		呃……我记得有个公式，可以分解任意次数的$a^n-b^n$……#parbreak()
+	]),
+	(chara.杨秉,[
+		哦，我知道你的意思了，我给你写一下吧：$
+			x^4-1=(x-1)(x^3+x^2+x+1).
+		$#noindent 但到这还没结束，你看这个因式里有个三次多项式，它的方程一定是有实根的，所以还能继续因式分解。想想，还能怎么做？#parbreak()
+	]),
+	(chara.李清,[
+		呃……我想一下啊。_陷入思考_#parbreak()
+	]),
+	(chara.杨秉,[
+		你可以试根嘛，代入一个值到这个多项式中，如果得到$0$那就对了。#parbreak()
+	]),
+	(chara.李清,[
+		哦，$-1$！它有一个根是$-1$，所以能提取一个因式$x+1$。然后……然后剩下$x^2+1$，就不用再分解了。#parbreak()
+	]),
+	(chara.杨秉,[
+		完全正确，请坐。当然我没有料到你第一步会这么想啊，一般的思路是先把$x^4$视作$(x^2)^2$用一次平方差公式，像这样：$
+			x^4-1=(x^2-1)(x^2+1)=(x-1)(x+1)(x^2+1).
+		$#parbreak()
+		那么说到平方差公式，我再来考考大家……#parbreak()
+	]),
+	(chara.吉峰,[
+		_起身_我叫吉峰。#parbreak()
+	]),
+	(chara.杨秉,[
+		我还没来得及叫你呢。没事没事，吉同学，因式分解$x^4+1$，你有思路吗？#parbreak()
+	]),
+	(chara.吉峰,[
+		_思索_嗯……没有。#parbreak()
+	]),
+	(chara.杨秉,[
+		提示一下啊，“平方差公式”。虽然这个式子里没有减号，但你能不能想办法造出一个来？#parbreak()
+	]),
+	(chara.牛弘,[
+		你加个什么再减个什么它就有了。#parbreak()
+		你想想啊，加个什么东西，能和$x^4+1$凑成平方式，而它本身也是个平方式……#parbreak()
+	]),
+	(chara.吉峰,[
+		_拍大腿_哎呀我知道了！_揉大腿_加个$2x^2$就好了。#parbreak()
+	]),
+	(chara.杨秉,[
+		对啦。请坐，我写一下过程啊：$
+			x^4+1=&x^4+2x^2+1-2x^2\
+			=&(x^2+1)^2-(sqrt(2)x)^2\
+			=&(x^2-sqrt(2)x+1)(x^2+sqrt(2)x+1).
+		$#noindent 就这样。像这种无中生有的恒等变换我们日后还会遇到很多，大家要有这个意识。#parbreak()
+		最后我们再给大家普及一个方法，我们先来看题吧：$x^5+1$，如何因式分解？李清同学？#parbreak()
+	]),
+	(chara.李清,[
+		_起身_首先……可以把它分解成$(x+1)(x^4-x^3+x^2-x+1)$，然后对于这个四次多项式……_思考良久_#parbreak()
+		好像不对啊。$+-1$代进去都不是零，那它没有整数解了呀。#parbreak()
+	]),
+	(chara.杨秉,[
+		好，请坐吧。就像李同学说的那样，第一步我们很容易就能套公式得到$x^4-x^3+x^2-x+1$，但问题是这个式子它就很难进一步因式分解了。#parbreak()
+		我们换个思路：对$x^5+1=0$这个方程，我们能不能求出它的根来？首先我们移项去解它：$
+			x^5=&-1\
+			x=&root(5,-1)=-1.
+		$#noindent 我们只能解出$-1$这一个根，而且它显然不是一个重根。那剩下的四个根呢？只能是复数根了。#parbreak()
+		回想一下我们中学学过的复数知识。一个复数可以用它的模长和辐角来表示，也就是$
+			z=r(cos theta+ii sin theta).
+		$#noindent 而当两个复数相乘时，结果就等于它们的模长相乘，辐角相加：$
+			r_1(cos theta_1+ii sin theta_1)times r_2(cos theta_2+ii sin theta_2)=r_1r_2[cos (theta_1+theta_2)+ii sin(theta_1+theta_2)]
+		$#parbreak()
+		现在我们把$x$和$-1$都表示成复数形式，我们记$x=r(cos theta+ii sin theta)$，而$-1$呢，它可以是$1(cos pi+ii sin pi)$，于是$
+			x^5=&-1\
+			r^5(cos 5theta+ii sin 5theta)=&1(cos pi+ii sin pi)
+		$#noindent 模长和辐角要分别相等，所以这个模长肯定是$r=1$没错。至于辐角呢……现在我们来看看温助教画的这个圆。#parbreak()
+		#figure(
+			cetz.canvas(x:25mm,y:25mm,{
+				import cetz.draw:*
+				import calc:pi,sin,cos
+				circle((0,0),radius:1)
+				line(
+					(-1,0),
+					(cos(108*pi/180),sin(108*pi/180)),
+					(cos(36*pi/180),sin(36*pi/180)),
+					(cos(-36*pi/180),sin(-36*pi/180)),
+					(cos(-108*pi/180),sin(-108*pi/180)),
+					close:true,
+				)
+				set-style(
+					mark:(end:(symbol:">")),
+					line:(mark:(end:(fill:black))),
+				)
+				line((-1.2,0),(1.4,0))
+				line((0,-1.2),(0,1.4))
+				for n in range(5) {
+					set-style(mark:(fill:red))
+					let theta=36deg*n
+					arc(
+						(cos(theta),sin(theta)),
+						start:theta,
+						stop:theta+36deg,
+						stroke:red,
+					)
+				}
+				for n in range(5) {
+					let theta=-36deg*n
+					set-style(mark:(fill:blue))
+					arc(
+						(cos(theta),sin(theta)),
+						start:theta,
+						stop:theta -36deg,
+						stroke:blue,
+					)
+				}
+				for n in range(5) {
+					set-style(mark:(fill:green))
+					let theta=108deg*n
+					let radius=1.1+n*.03
+					arc(
+						(radius*cos(theta),radius*sin(theta)),
+						start:theta,
+						stop:theta+108deg,
+						radius:radius+.0235,
+						stroke:green,
+					)
+				}
+				for n in range(5) {
+					let theta=72deg*n+36deg
+					content((0.8*cos(theta),0.8*sin(theta)),$x_#(n+1)$)
+				}
+			})
+		)
+		现在我画一个坐标系，把这个平面当作复平面，这个圆当作单位圆。模长为$1$的复数的乘方，其实就是在单位圆上不停地转同一个辐角；而我们的目的，是从$0degree$开始用同一个角度转五次，让它落在$-1$这个位置上。#parbreak()
+		首先$36degree$它转五次是肯定能到$180degree$这个位置的，我把每次转的过程用红笔描出来。#parbreak()
+		既然朝正方向每次转$36degree$能到正对面的位置，那朝负方向也能。我用蓝笔描出来。#parbreak()
+		还有一种情况是每次转$108degree$，五次加起来刚好一圈半，也能到这个位置，我用绿笔画一下。当然每次转$-108degree$也没问题，我就不画了。#parbreak()
+		最后还有一种情况就是每次转$180degree$，两圈半也能到这个位置。#parbreak()
+		好了，刚才我们列举了五种通过$x^5$达到$-1$的方式。那么它们对应的$x_k$在这个单位圆上的辐角就分别是：$+-36degree,+-108degree$，以及$180degree$。把这五个点连起来的话就是一个正五边形。#parbreak()
+		现在我们就可以把这五个根表示出来了，我们分别记为$x_1$到$x_5$。在$36degree$位置上的复数是$cos 36degree+ii sin 36degree$；在$108degree$位置上的复数是$cos 108degree+ii sin 108degree$；在$180degree$位置上的复数就是$-1$，以此类推，剩的我就不说了。总之，这个因式分解的结果就可以写成$
+			x^5+1=(x-x_1)(x-x_2)(x-x_3)(x-x_4)(x-x_5)
+		$#parbreak()
+		但是这样还没结束，因为因式分解的结果中还有虚数，这里的$x_1,x_2,x_4,x_5$全都是复数，而我们是不希望留着复数的，所以怎么处理呢，这就是我们接下来要解决的问题了。#parbreak()
+		这里我再给大家补充一个事实：如果多项式方程的系数都是实数，那么这个方程的所有复数根一定是以共轭复根的形式存在的。我们还是回到这个图中——大家看，$x^5+1=0$共有一个实根和四个复根，而它的复根都是以关于$x$轴两两对称的形式存在的，我们把它们叫做共轭复数。共轭复数具有非常良好的性质，它们的和是实数，它们的积也是实数，参与运算时能够完美地抵消掉虚数。#parbreak()
+		我举个例子吧，就拿$x_1$和$x_5$来说：$
+			(x-x_1)(x-x_5)=x^2-(x_1+x_5)x+x_1x_5.
+		$#noindent 现在，施仁同学，请听题——_施仁起身_$x_1x_5$等于多少？#parbreak()
+	]),
+	(chara.施仁,[
+		呃，我……我算一下_找笔_。#parbreak()
+	]),
+	(chara.杨秉,[
+		_摆手_不，你不用算，你就看这个图_指_。回想一下，我们刚才提过复数的三角形式，两个复数相乘的时候模长如何？辐角又如何？#parbreak()
+	]),
+	(chara.施仁,[
+		_稍加思考_这个……等于$1$？#parbreak()
+	]),
+	(chara.杨秉,[
+		对。那我再问你，$x_1+x_5$等于多少？#parbreak()
+	]),
+	(chara.施仁,[
+		_稍加思考_这个……等于$2cos 36degree$？#parbreak()
+	]),
+	(chara.杨秉,[
+		你可以回答得更有自信一点，都是对的，别那么紧张啊。请坐吧。#parbreak()
+		所以我们看，虽然$x_1$和$x_5$都是复数，但是$(x-x_1)(x-x_5)$却是一个实数，它最终等于$
+			x^2-2x cos 36degree+1,
+		$#noindent 同样道理，我们也能得到$
+			(x-x_2)(x-x_4)=x^2-2x cos 108degree+1.
+		$#noindent 所以这个因式分解的最终结果就是：$
+			x^5+1=(x+1)(x^2-2x cos 36degree+1)(x^2-2x cos 108degree+1)
+		$#noindent 大家看，我们因式分解的最终结果当中，不算常数的话只有两种因式：一种是一次多项式，另一种是$Delta<0$的二次多项式。所以大家在分解到最后的时候，一定要留意一下二次因式的$Delta$，以免分解不彻底。#parbreak()
+	]),
+)

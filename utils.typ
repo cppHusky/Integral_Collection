@@ -182,7 +182,7 @@
 				text(
 					font:"Zhuque Fangsong (technical preview)",
 					size:10pt,
-					message,
+					message+parbreak(),
 				)
 			))
 		} else {
@@ -197,7 +197,7 @@
 					x:5pt,
 					y:par.leading/2,
 				),
-				message
+				message+parbreak()
 			))
 		}
 	}

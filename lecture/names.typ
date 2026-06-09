@@ -7,6 +7,8 @@
 	肖虑:"肖虑",
 	李清:"李清",
 	吉峰:"吉峰",
+	吕顺:"吕顺",
+	许诺:"许诺",
 )
 #let avatar(c)={
 	set circle(
@@ -34,6 +36,10 @@
 		circle("李")
 	} else if c==chara.吉峰 {
 		circle("吉")
+	} else if c==chara.吕顺 {
+		circle("吕")
+	} else if c==chara.许诺 {
+		circle("许")
 	}
 }
 #let chara-background(c)={

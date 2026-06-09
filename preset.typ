@@ -269,11 +269,12 @@
 		numbering:(..nums)=>numbering("1.1",..nums.pos().slice(2)),
 	)
 	show heading.where(level:4):set align(left)
+	show regex("[，。．、：；？！》』」】〗〕〉］｝“‘《『「【〖〔〈［｛，。．、：；]+"):it=>it.text.replace("。","．")
+	show regex("（.*?）"):emph
 	show emph:set text(
 		font:"Zhuque Fangsong (technical preview)",
 		size:10pt,
 	)
-	show emph:it=>[（#it）]
 	body
 }
 #let preset-appendix(body)={

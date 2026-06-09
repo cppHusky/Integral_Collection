@@ -179,11 +179,7 @@
 					x:5pt,
 					y:par.leading/2,
 				),
-				text(
-					font:"Zhuque Fangsong (technical preview)",
-					size:10pt,
-					message+parbreak(),
-				)
+				emph(message)+parbreak(),
 			))
 		} else {
 			let speaker=row.at(0)

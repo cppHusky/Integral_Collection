@@ -11,7 +11,7 @@
 #let avatar(c)={
 	set circle(
 		radius:12pt,
-		inset:3.5pt,
+		inset:3pt,
 		stroke:none,
 	)
 	set text(

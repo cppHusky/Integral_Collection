@@ -168,37 +168,40 @@
 }
 #let noindent=h(-2em)
 #let lesson(..args)=context{
-	let arr=()
-	for row in args.pos() {
+	let message-cell=(row)=>{
 		if type(row)==content {
 			let message=row
-			arr.push(grid.cell(
-				colspan:2,
+			grid.cell(
 				fill:chara-background(none),
 				inset:(
 					x:5pt,
 					y:par.leading/2,
 				),
 				emph(message)+parbreak(),
-			))
+			)
 		} else {
 			let speaker=row.at(0)
 			let message=row.at(1)
-			arr.push(grid.cell(
-				avatar(speaker),
-			))
-			arr.push(grid.cell(
+			grid.cell(
 				fill:chara-background(speaker),
 				inset:(
 					x:5pt,
 					y:par.leading/2,
 				),
-				message+parbreak()
-			))
+				{
+					place(
+						left+top,
+						dx:-5pt,
+						dy:-par.leading/2,
+						avatar(speaker),
+					)
+					message+parbreak()
+				}
+			)
 		}
 	}
 	grid(
-		columns:(0fr,1fr),
-		..arr,
+		columns:(1fr),
+		..args.pos().map(message-cell),
 	)
 }

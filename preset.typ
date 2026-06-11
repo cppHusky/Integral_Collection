@@ -234,7 +234,7 @@
 				alignment,
 				dy:25mm+(6.4em+20pt)*(section -1)*2.4,
 				link(
-					label(numbering("阶段一",section)),
+					query(selector(heading.where(level:3)).before(here())).last().location(),
 					box(
 						height:6.4em+20pt,
 						width:1.4em,

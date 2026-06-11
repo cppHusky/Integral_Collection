@@ -1,4 +1,5 @@
 #import "lecture/names.typ":chara,avatar,chara-background
+#import "@preview/easy-pinyin:0.1.0":pinyin
 #let page-break={
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
@@ -205,3 +206,20 @@
 		..args.pos().map(message-cell),
 	)
 }
+#let ruby(char,pinyin-str)=box(
+	width:1em,
+	height:1em,
+	{
+		assert(type(char)==str)
+		place(char)
+		set text(size:5pt)
+		set align(center)
+		move(
+			dy:-1em,
+			box(
+				width:1em,
+				pinyin(pinyin-str)
+			)
+		)
+	},
+)

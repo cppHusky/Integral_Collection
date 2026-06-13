@@ -12,6 +12,9 @@
 	刘津:"刘津",
 	史姝:"史姝",
 	赵超:"赵超",
+	窦法:"窦法",
+	隋欣:"隋欣",
+	寇茂:"寇茂",
 )
 #let avatar(c)={
 	set circle(
@@ -49,6 +52,12 @@
 		circle("史")
 	} else if c==chara.赵超 {
 		circle("赵")
+	} else if c==chara.窦法 {
+		circle("窦")
+	} else if c==chara.隋欣 {
+		circle("隋")
+	} else if c==chara.寇茂 {
+		circle("寇")
 	}
 }
 #let chara-background(c)={

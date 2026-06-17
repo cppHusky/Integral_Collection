@@ -206,20 +206,21 @@
 		..args.pos().map(message-cell),
 	)
 }
-#let ruby(char,pinyin-str)=box(
-	width:1em,
-	height:1em,
-	{
-		assert(type(char)==str)
-		place(char)
-		set text(size:5pt)
-		set align(center)
-		move(
-			dy:-1em,
-			box(
-				width:1em,
+#let ruby(char,pinyin-str)={
+	set text(
+		top-edge:"ascender",
+		bottom-edge:"baseline",
+	)
+	box(
+		stack(
+			dir:btt,
+			spacing:.5pt,
+			char,
+			{
+				set align(center+bottom)
+				set text(size:5pt)
 				pinyin(pinyin-str)
-			)
+			}
 		)
-	},
-)
+	)
+}

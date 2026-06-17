@@ -133,7 +133,6 @@
 	)
 }
 #let preset(body)={
-	import "@preview/itemize:0.2.0"
 	set page(
 		paper:"a4",
 		margin:(

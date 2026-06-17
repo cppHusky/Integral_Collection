@@ -1,5 +1,4 @@
 #import "lecture/names.typ":chara,avatar,chara-background
-#import "@preview/easy-pinyin:0.1.0":pinyin
 #let page-break={
 	set page(header:none,footer:none)
 	pagebreak(weak:true,to:"odd")
@@ -205,6 +204,33 @@
 		columns:(1fr),
 		..args.pos().map(message-cell),
 	)
+}
+#let pinyin(body)={
+	show "a1":"ā"
+	show "a2":"á"
+	show "a3":"ǎ"
+	show "a4":"à"
+	show "e1":"ē"
+	show "e2":"é"
+	show "e3":"ě"
+	show "e4":"è"
+	show "i1":"ī"
+	show "i2":"í"
+	show "i3":"ǐ"
+	show "i4":"ì"
+	show "o1":"ō"
+	show "o2":"ó"
+	show "o3":"ǒ"
+	show "o4":"ò"
+	show "u1":"ū"
+	show "u2":"ú"
+	show "u3":"ǔ"
+	show "u4":"ù"
+	show "v1":"ǖ"
+	show "v2":"ǘ"
+	show "v3":"ǚ"
+	show "v4":"ǜ"
+	body
 }
 #let ruby(char,pinyin-str)={
 	set text(

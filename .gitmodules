@@ -1,3 +1,9 @@
-[submodule "fonts"]
-	path = fonts
-	url = git@github.com:cppHusky/fonts-as-submodule.git
+[submodule "notofonts.github.io"]
+	path = fonts/notofonts.github.io
+	url = https://github.com/notofonts/notofonts.github.io.git
+[submodule "noto-cjk"]
+	path = fonts/noto-cjk
+	url = https://github.com/notofonts/noto-cjk.git
+[submodule "adobe-blank"]
+	path = fonts/adobe-blank
+	url = https://github.com/adobe-fonts/adobe-blank.git

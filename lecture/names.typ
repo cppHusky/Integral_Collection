@@ -26,39 +26,7 @@
 		font:"Noto Sans CJK SC",
 		fill:navy,
 	)
-	if c==chara.杨秉 {
-		circle("杨")
-	} else if c==chara.严佩 {
-		circle("严")
-	} else if c==chara.温舒 {
-		circle("温")
-	} else if c==chara.牛弘 {
-		circle("牛")
-	} else if c==chara.施仁 {
-		circle("施")
-	} else if c==chara.肖虑 {
-		circle("肖")
-	} else if c==chara.李清 {
-		circle("李")
-	} else if c==chara.吉峰 {
-		circle("吉")
-	} else if c==chara.吕顺 {
-		circle("吕")
-	} else if c==chara.许诺 {
-		circle("许")
-	} else if c==chara.刘津 {
-		circle("刘")
-	} else if c==chara.史姝 {
-		circle("史")
-	} else if c==chara.赵超 {
-		circle("赵")
-	} else if c==chara.窦法 {
-		circle("窦")
-	} else if c==chara.隋欣 {
-		circle("隋")
-	} else if c==chara.寇茂 {
-		circle("寇")
-	}
+	circle(c.first(default:"？"))
 }
 #let chara-background(c)={
 	if c==chara.杨秉 {

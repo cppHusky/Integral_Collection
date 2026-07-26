@@ -5,3 +5,8 @@ main.pdf:$(typ)
 	typst c $^ ${TYPST_ARGS}
 watch:
 	typst w $(typ) ${TYPST_ARGS}
+font_init:
+	pushd fonts
+	./pull-font.sh
+	git sudmobule update --init
+	popd
